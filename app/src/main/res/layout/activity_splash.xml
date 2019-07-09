@@ -6,4 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".SplashActivity">
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hola Mundo"
+        tools:layout_editor_absoluteX="160dp"
+        tools:layout_editor_absoluteY="364dp"
+        tools:text="hola mundo" />
 </android.support.constraint.ConstraintLayout>
