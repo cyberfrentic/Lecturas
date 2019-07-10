@@ -49,12 +49,12 @@ public class LoginActivity extends AppCompatActivity {
         if (!usuario.isEmpty() && !contra.isEmpty()){
             Toast.makeText(this, "Verificando usuario" + usuario, Toast.LENGTH_SHORT).show();
             Cursor fila = BaseDeDatos.rawQuery("select user, pass from usuarios where user=?",new String[] {usuario});
-
+            fila.moveToFirst();
             String u = fila.getString(0);
             String p = fila.getString(1);
             if (usuario.equals(u) && contra.equals(p)){
                 Toast.makeText(this, "El usuario "+u+"ha hecho login", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(this, MainActivity.class);
+                Intent intent = new Intent(this, navigationDrawActiviy.class);
                 BaseDeDatos.close();
                 startActivity(intent);
             }
