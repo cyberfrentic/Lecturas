@@ -17,4 +17,7 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+
+    <string name="nombre">Nombre</string>
+    <string name="buton_registrar">Registrar</string>
 </resources>
