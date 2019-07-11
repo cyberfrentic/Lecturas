@@ -2,19 +2,22 @@
     <string name="app_name">Lecturas</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
+    <string name="nav_header_title">Sistema Movil Lecturas</string>
+    <string name="nav_header_subtitle">Organismo Operador Tulum</string>
+    <string name="nav_header_desc">Navegador de toma de lecturas</string>
     <string name="action_settings">Settings</string>
     <string name="etuser">Usuario</string>
     <string name="etpass">Contraseña</string>
     <string name="button">Acceder</string>
     <string name="title_activity_navigation_draw_activiy">navigationDrawActiviy</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="menu_tools">Tools</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
+    <string name="menu_home">Inicio</string>
+    <string name="menu_gallery">Agregar Lecturas</string>
+    <string name="menu_slideshow">Lista de Lecturas</string>
+    <string name="menu_tools">Editar Lectura</string>
+    <string name="menu_share">Listado de Medidores</string>
+    <string name="menu_send">Salir</string>
+
+    <string name="nombre">Nombre</string>
+    <string name="buton_registrar">Registrar</string>
 </resources>

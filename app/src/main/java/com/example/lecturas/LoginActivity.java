@@ -47,18 +47,23 @@ public class LoginActivity extends AppCompatActivity {
         String contra = tv_contrasenia.getText().toString();
 
         if (!usuario.isEmpty() && !contra.isEmpty()){
-            Toast.makeText(this, "Verificando usuario" + usuario, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Verificando usuario " + usuario, Toast.LENGTH_SHORT).show();
             Cursor fila = BaseDeDatos.rawQuery("select user, pass from usuarios where user=?",new String[] {usuario});
-            fila.moveToFirst();
-            String u = fila.getString(0);
-            String p = fila.getString(1);
-            if (usuario.equals(u) && contra.equals(p)){
-                Toast.makeText(this, "El usuario "+u+"ha hecho login", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(this, navigationDrawActiviy.class);
-                BaseDeDatos.close();
-                startActivity(intent);
+            if (fila.moveToFirst()) {
+                fila.moveToFirst();
+                String u = fila.getString(0);
+                String p = fila.getString(1);
+                if (usuario.equals(u) && contra.equals(p)) {
+                    Toast.makeText(this, "El usuario " + usuario + " ha hecho login", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(this, navigationDrawActiviy.class);
+                    BaseDeDatos.close();
+                    startActivity(intent);
+                }
+            }else {
+                Toast.makeText(this, "El usuario o la contraseña son incorrectas, Pruebe de nuevo", Toast.LENGTH_SHORT).show();
+                tv_usuario.setText("");
+                tv_contrasenia.setText("");
             }
-
         }else{
             Toast.makeText(this, "Debe llear todos los campos", Toast.LENGTH_LONG).show();
         }
