@@ -9,7 +9,7 @@
     <string name="etuser">Usuario</string>
     <string name="etpass">Contraseña</string>
     <string name="button">Acceder</string>
-    <string name="title_activity_navigation_draw_activiy">navigationDrawActiviy</string>
+    <string name="title_activity_navigation_draw_activiy">Sistema Movil de Lecturas</string>
 
     <string name="menu_home">Inicio</string>
     <string name="menu_gallery">Agregar Lecturas</string>
@@ -20,4 +20,6 @@
 
     <string name="nombre">Nombre</string>
     <string name="buton_registrar">Registrar</string>
+    <string name="buton_Importar">Importar Medidores</string>
+    <string name="buton_Exportar">Exportar Medidores</string>
 </resources>

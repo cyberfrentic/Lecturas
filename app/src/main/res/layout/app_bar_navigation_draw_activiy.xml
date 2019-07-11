@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,13 +23,54 @@
 
     <include layout="@layout/content_navigation_draw_activiy" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/grupoFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:backgroundTint="#009688"
-        app:srcCompat="@android:drawable/ic_menu_edit" />
+        app:fab_labelStyle="@style/etiqueta"
+        app:fab_addButtonColorPressed="@color/colorPrimaryDark">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fab_icon="@drawable/ic_action_nuevo"
+        app:fab_size="normal"
+        app:fab_colorNormal="#E91E63"
+        app:fab_title="Lectura Nueva"/>
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_icon="@drawable/ic_menu_slideshow"
+            app:fab_size="normal"
+            app:fab_colorNormal="#FF5722"
+            app:fab_title="Lista Lecturas"/>
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_icon="@drawable/ic_menu_manage"
+            app:fab_size="mini"
+            app:fab_colorNormal="#FFC107"
+            app:fab_title="Editar Lectura"/>
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/fab"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom|end"-->
+        <!--android:layout_margin="@dimen/fab_margin"-->
+        <!--app:backgroundTint="#009688"-->
+        <!--app:srcCompat="@drawable/ic_action_user"-->
+        <!--tools:ignore="VectorDrawableCompat" />-->
+
 
 </android.support.design.widget.CoordinatorLayout>
