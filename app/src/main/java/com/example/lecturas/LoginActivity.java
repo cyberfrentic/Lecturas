@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -36,6 +37,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         tv_usuario = (EditText)findViewById(R.id.edUser);
         tv_contrasenia = (EditText)findViewById(R.id.et_password);
+        tv_usuario.setHintTextColor(Color.GRAY);
+        tv_contrasenia.setHintTextColor(Color.GRAY);
     }
 
     //metodo para verificar la existencia de un usuario y hacer loggin
