@@ -16,6 +16,7 @@ import android.view.Menu;
 import com.example.lecturas.fragments.homeFragment;
 import com.example.lecturas.fragments.importarFragment;
 import com.example.lecturas.fragments.lecturafragment;
+import com.example.lecturas.fragments.listaFragment;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
@@ -24,13 +25,13 @@ public class navigationDrawActiviy extends AppCompatActivity
 
     //variable para guardar la opcion selccionada en el menu
     public static int opcion;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_draw_activiy);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         // capturar la opcion seleccionada en el menu segun el fragment expuesto
         FragmentManager fm = getSupportFragmentManager();
@@ -70,6 +71,8 @@ public class navigationDrawActiviy extends AppCompatActivity
             public void onClick(View view) {
                 Snackbar.make(view, "Lista de lecturas", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                FragmentManager fm = getSupportFragmentManager();
+                fm.beginTransaction().replace(R.id.contenedor, new listaFragment()).addToBackStack(null).commit();
                 menuBotones.collapse();
             }
         });
@@ -97,6 +100,8 @@ public class navigationDrawActiviy extends AppCompatActivity
 
     }
 
+
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -113,6 +118,7 @@ public class navigationDrawActiviy extends AppCompatActivity
         getMenuInflater().inflate(R.menu.navigation_draw_activiy, menu);
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -143,7 +149,7 @@ public class navigationDrawActiviy extends AppCompatActivity
         } else if (id == R.id.nav_gallery) {
             fm.beginTransaction().replace(R.id.contenedor, new lecturafragment()).addToBackStack(null).commit();
         } else if (id == R.id.nav_slideshow) {
-//            fm.beginTransaction().replace(R.id.contenedor, new listaFragment()).commit();
+            fm.beginTransaction().replace(R.id.contenedor, new listaFragment()).addToBackStack(null).commit();
         } else if (id == R.id.nav_tools) {
 //            fm.beginTransaction().replace(R.id.contenedor, new editarFragment()).commit();
         } else if (id == R.id.nav_share) {
