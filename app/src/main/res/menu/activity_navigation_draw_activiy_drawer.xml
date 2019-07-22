@@ -24,20 +24,15 @@
             android:id="@+id/nav_share"
             android:icon="@drawable/ic_menu_share"
             android:title="@string/menu_share" />
+        <item
+            android:id="@+id/importar"
+            android:icon="@android:drawable/stat_notify_sdcard_usb"
+            android:title="@string/buton_Importar" />
+        <item
+            android:id="@+id/exportar"
+            android:icon="@android:drawable/stat_notify_sdcard_prepare"
+            android:title="@string/buton_Exportar" />
     </group>
-
-    <item android:title="Opciones Administrativas">
-        <menu>
-            <item
-                android:id="@+id/importar"
-                android:icon="@android:drawable/stat_notify_sdcard_usb"
-                android:title="@string/buton_Importar" />
-            <item
-                android:id="@+id/exportar"
-                android:icon="@android:drawable/stat_notify_sdcard_prepare"
-                android:title="@string/buton_Exportar" />
-        </menu>
-    </item>
 
     <item android:title="Cerrar App">
         <menu>

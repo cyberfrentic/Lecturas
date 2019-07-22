@@ -22,4 +22,11 @@
     <string name="buton_registrar">Registrar</string>
     <string name="buton_Importar">Importar Medidores</string>
     <string name="buton_Exportar">Exportar Medidores</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="importar">Importar Data</string>
+    <string name="ruta">Ruta Actual</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

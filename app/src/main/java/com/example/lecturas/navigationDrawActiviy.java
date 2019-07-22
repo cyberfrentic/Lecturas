@@ -2,24 +2,28 @@ package com.example.lecturas;
 
 import android.content.Intent;
 import android.os.Bundle;
-//import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
-
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-
+import com.example.lecturas.fragments.homeFragment;
+import com.example.lecturas.fragments.importarFragment;
+import com.example.lecturas.fragments.lecturafragment;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 public class navigationDrawActiviy extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener{
+
+    //variable para guardar la opcion selccionada en el menu
+    public static int opcion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +31,19 @@ public class navigationDrawActiviy extends AppCompatActivity
         setContentView(R.layout.activity_navigation_draw_activiy);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        // capturar la opcion seleccionada en el menu segun el fragment expuesto
+        FragmentManager fm = getSupportFragmentManager();
+        switch (opcion){
+            case 1: fm.beginTransaction().replace(R.id.contenedor, new homeFragment()).commit();break;
+            case 2: fm.beginTransaction().replace(R.id.contenedor, new lecturafragment()).addToBackStack(null).commit();break;
+            case 3: fm.beginTransaction().replace(R.id.contenedor, new homeFragment()).addToBackStack(null).commit();break;
+            case 4: fm.beginTransaction().replace(R.id.contenedor, new homeFragment()).addToBackStack(null).commit();break;
+            case 5: fm.beginTransaction().replace(R.id.contenedor, new homeFragment()).addToBackStack(null).commit();break;
+            case 6: fm.beginTransaction().replace(R.id.contenedor, new importarFragment()).addToBackStack(null).commit();break;
+            case 7: fm.beginTransaction().replace(R.id.contenedor, new homeFragment()).addToBackStack(null).commit();break;
+            default:  fm.beginTransaction().replace(R.id.contenedor, new homeFragment()).addToBackStack(null).commit();break;
+        }
 
     // ################ eventos action buton del menu button
         //#################evento 1 lectur nuevas
@@ -40,6 +57,8 @@ public class navigationDrawActiviy extends AppCompatActivity
             public void onClick(View view) {
                 Snackbar.make(view, "Lectura Nueva", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                FragmentManager fm = getSupportFragmentManager();
+                fm.beginTransaction().replace(R.id.contenedor, new lecturafragment()).addToBackStack(null).commit();
                 menuBotones.collapse();
             }
         });
@@ -74,6 +93,8 @@ public class navigationDrawActiviy extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+
     }
 
     @Override
@@ -113,17 +134,24 @@ public class navigationDrawActiviy extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        // enlace entre el fragment y el activity
+        FragmentManager fm = getSupportFragmentManager();
 
         if (id == R.id.nav_home) {
             // Handle the camera action
+            fm.beginTransaction().replace(R.id.contenedor, new homeFragment()).commit();
         } else if (id == R.id.nav_gallery) {
-
+            fm.beginTransaction().replace(R.id.contenedor, new lecturafragment()).addToBackStack(null).commit();
         } else if (id == R.id.nav_slideshow) {
-
+//            fm.beginTransaction().replace(R.id.contenedor, new listaFragment()).commit();
         } else if (id == R.id.nav_tools) {
-
+//            fm.beginTransaction().replace(R.id.contenedor, new editarFragment()).commit();
         } else if (id == R.id.nav_share) {
-
+//            fm.beginTransaction().replace(R.id.contenedor, new medidoresFragment()).commit();
+        } else if (id == R.id.importar) {
+            fm.beginTransaction().replace(R.id.contenedor, new importarFragment()).addToBackStack(null).commit();
+        } else if (id == R.id.exportar) {
+//            fm.beginTransaction().replace(R.id.contenedor, new exportarFragment()).commit();
         } else if (id == R.id.nav_send) {
             Intent salida = new Intent( Intent.ACTION_MAIN); //Llamando a la activity principal
             finish(); // La cerramos.
@@ -134,4 +162,5 @@ public class navigationDrawActiviy extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

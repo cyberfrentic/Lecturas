@@ -1,26 +1,35 @@
 package com.example.lecturas.fragments;
 
-import android.content.Context;
+
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.Toast;
-
+import android.widget.TextView;
 import com.example.lecturas.AdminSQLiteOpenHelper;
+import com.example.lecturas.PadronVo;
 import com.example.lecturas.R;
+import com.example.lecturas.adaptadorpadron;
+
+import java.util.ArrayList;
 
 
 public class lecturafragment extends Fragment {
 
     View vista;
-    private ListView lista;
+    ArrayList<PadronVo> listaPadron;
+    RecyclerView listas;
+    TextView textview;
+    FragmentManager fragmentManager;
+    capturaLecturaFragment lectura;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,28 +38,62 @@ public class lecturafragment extends Fragment {
         vista = inflater.inflate(R.layout.fragment_lecturafragment, container, false);
 
         // codigo abajo
-        lista = (ListView) vista.findViewById(R.id.listado);
-        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(getContext(), "administracion", null, 1);
-        SQLiteDatabase BaseDeDatos = admin.getWritableDatabase();
-        Cursor fila = BaseDeDatos.rawQuery("select numloc, contrato, nombre, direccion, nummed, tarifa, lecant from padron",null);
-        if (fila.moveToFirst()){
-            int numRows = (int) DatabaseUtils.queryNumEntries(BaseDeDatos, "padron");
-            String [][] datos = new String [7][numRows];
-            for (int x =0; x < numRows; x++){
-                datos[0][x] = fila.getString(0);
-                datos[1][x] = fila.getString(1);
-                datos[2][x] = fila.getString(2);
-                datos[3][x] = fila.getString(3);
-                datos[4][x] = fila.getString(4);
-                datos[5][x] = fila.getString(5);
-                datos[6][x] = fila.getString(6);
-                fila.moveToNext();
+        listaPadron = new ArrayList<>();
+
+        listas = (RecyclerView) vista.findViewById(R.id.recyclerlistado);
+        listas.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        llenarListaPadron();
+        adaptadorpadron adapter = new adaptadorpadron(listaPadron);
+        listas.setAdapter(adapter);
+        //evento onClickListener del RecyclerView
+        adapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Toast.makeText(getContext(),"Has seleccionado el contrato: "+ listaPadron.get(listas.getChildAdapterPosition(view)).getContrato(),Toast.LENGTH_LONG).show();
+                // Envio de datos de un fragment a otro
+                String c = listaPadron.get(listas.getChildAdapterPosition(view)).getContrato();
+                String m = listaPadron.get(listas.getChildAdapterPosition(view)).getNummed();
+                String n = listaPadron.get(listas.getChildAdapterPosition(view)).getNombre();
+                String d = listaPadron.get(listas.getChildAdapterPosition(view)).getDireccion();
+
+                goToCapturaLectura(c,m,n,d);
+
+
+
             }
-            Toast.makeText(getContext(), datos[0][1000], Toast.LENGTH_LONG).show();
-        }
+        });
 
         return vista;
     }
 
+
+    private void llenarListaPadron() {
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(getContext(), "administracion", null, 1);
+        SQLiteDatabase BaseDeDatos = admin.getWritableDatabase();
+        Cursor fila = BaseDeDatos.rawQuery("select numloc, contrato, nombre, direccion, nummed, modif from padron",null);
+        if (fila.moveToFirst()){
+            int numRows = (int) DatabaseUtils.queryNumEntries(BaseDeDatos, "padron");
+            for (int x =0; x < numRows; x++){
+                if(fila.getString(5).toString().equals("0")){
+                    listaPadron.add(new PadronVo(fila.getString(0),fila.getString(1),fila.getString(2),fila.getString(3),fila.getString(4),R.drawable.user));
+                }
+                fila.moveToNext();
+            }
+        }
+
+    }
+
+    private void goToCapturaLectura(String c, String m, String n, String d) {
+        lectura = new capturaLecturaFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("contrato", c);
+        bundle.putString("medidor", m);
+        bundle.putString("nombre", n);
+        bundle.putString("direccion", d);
+        lectura.setArguments(bundle);
+        fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.contenedor,lectura).addToBackStack(null).commit();
+    }
 
 }
