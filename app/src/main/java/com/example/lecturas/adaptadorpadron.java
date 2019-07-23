@@ -1,6 +1,6 @@
 package com.example.lecturas;
 
-import android.support.annotation.NonNull;
+
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +18,7 @@ public class adaptadorpadron extends RecyclerView.Adapter<adaptadorpadron.ViewHo
     public adaptadorpadron(ArrayList<PadronVo> listapadron) {
         this.listapadron = listapadron;
     }
+
 
     @Override
     public adaptadorpadron.ViewHolderpadron onCreateViewHolder( ViewGroup parent, int i) {

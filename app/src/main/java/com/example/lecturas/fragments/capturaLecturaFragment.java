@@ -32,6 +32,7 @@ public class capturaLecturaFragment extends Fragment {
     FragmentManager fragmentManager;
     lecturafragment lecturaatras;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

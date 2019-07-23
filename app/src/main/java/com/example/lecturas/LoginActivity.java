@@ -60,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(this, "El usuario " + usuario + " ha hecho login", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this, navigationDrawActiviy.class);
                     BaseDeDatos.close();
+                    intent.putExtra("usuario", u);
                     startActivity(intent);
                 }
             }else {

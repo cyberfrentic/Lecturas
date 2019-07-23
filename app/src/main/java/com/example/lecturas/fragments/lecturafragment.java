@@ -7,26 +7,31 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.SearchView;
+
 import com.example.lecturas.AdminSQLiteOpenHelper;
 import com.example.lecturas.PadronVo;
 import com.example.lecturas.R;
 import com.example.lecturas.adaptadorpadron;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
-public class lecturafragment extends Fragment {
+public class lecturafragment extends Fragment{
 
     View vista;
     ArrayList<PadronVo> listaPadron;
     RecyclerView listas;
-    TextView textview;
     FragmentManager fragmentManager;
     capturaLecturaFragment lectura;
 
@@ -42,6 +47,7 @@ public class lecturafragment extends Fragment {
 
         listas = (RecyclerView) vista.findViewById(R.id.recyclerlistado);
         listas.setLayoutManager(new LinearLayoutManager(getContext()));
+        listas.setItemAnimator(new DefaultItemAnimator());
 
         llenarListaPadron();
         adaptadorpadron adapter = new adaptadorpadron(listaPadron);
@@ -58,15 +64,20 @@ public class lecturafragment extends Fragment {
                 String d = listaPadron.get(listas.getChildAdapterPosition(view)).getDireccion();
 
                 goToCapturaLectura(c,m,n,d);
-
-
-
             }
         });
-
         return vista;
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_buscador, menu);
+        MenuItem searchItem = menu.findItem(R.id.buscador);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener((SearchView.OnQueryTextListener) this);
+        searchView.setQueryHint("Search.. ");
+        super.onCreateOptionsMenu(menu, inflater);
+    }
 
     private void llenarListaPadron() {
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(getContext(), "administracion", null, 1);
@@ -95,5 +106,5 @@ public class lecturafragment extends Fragment {
         fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.contenedor,lectura).addToBackStack(null).commit();
     }
-
 }
+
