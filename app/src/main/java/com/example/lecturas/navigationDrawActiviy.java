@@ -1,9 +1,15 @@
 package com.example.lecturas;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
+import android.text.format.Time;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,12 +19,23 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.Toast;
+
+import com.example.lecturas.fragments.cedulaFragment;
 import com.example.lecturas.fragments.homeFragment;
 import com.example.lecturas.fragments.importarFragment;
 import com.example.lecturas.fragments.lecturafragment;
 import com.example.lecturas.fragments.listaFragment;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 public class navigationDrawActiviy extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
@@ -74,17 +91,8 @@ public class navigationDrawActiviy extends AppCompatActivity
                 FragmentManager fm = getSupportFragmentManager();
                 fm.beginTransaction().replace(R.id.contenedor, new listaFragment()).addToBackStack(null).commit();
                 menuBotones.collapse();
-            }
-        });
 
-        //############# evento 3 editar lectura
 
-        fab3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Lista de lecturas", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                menuBotones.collapse();
             }
         });
     //############################################################################
@@ -101,6 +109,9 @@ public class navigationDrawActiviy extends AppCompatActivity
             navigationView.getMenu().findItem(R.id.importar).setVisible(false);
             navigationView.getMenu().findItem(R.id.exportar).setVisible(false);
         }
+        navigationView.getMenu().findItem(R.id.nav_tools).setVisible(false);
+        navigationView.getMenu().findItem(R.id.nav_share).setVisible(false);
+
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -158,7 +169,7 @@ public class navigationDrawActiviy extends AppCompatActivity
             // Handle the camera action
             fm.beginTransaction().replace(R.id.contenedor, new homeFragment()).commit();
         } else if (id == R.id.nav_gallery) {
-            fm.beginTransaction().replace(R.id.contenedor, new lecturafragment()).addToBackStack(null).commit();
+                fm.beginTransaction().replace(R.id.contenedor, new lecturafragment()).addToBackStack(null).commit();
         } else if (id == R.id.nav_slideshow) {
             fm.beginTransaction().replace(R.id.contenedor, new listaFragment()).addToBackStack(null).commit();
         } else if (id == R.id.nav_tools) {
@@ -168,7 +179,52 @@ public class navigationDrawActiviy extends AppCompatActivity
         } else if (id == R.id.importar) {
             fm.beginTransaction().replace(R.id.contenedor, new importarFragment()).addToBackStack(null).commit();
         } else if (id == R.id.exportar) {
-//            fm.beginTransaction().replace(R.id.contenedor, new exportarFragment()).commit();
+            final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            // Setting Dialog Title
+            alertDialog.setTitle("Sistema Lecturas");
+            // Setting Dialog Message
+            alertDialog.setMessage("Se procedera a Exportar los datos de las Lecturas tomadas!");
+            // Setting Icon to Dialog
+            alertDialog.setIcon(R.drawable.alerta);
+            // Setting OK Button
+            alertDialog.setButton("Aceptar", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    String fileName = "rutaLecturas.txt";
+                    AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(getApplicationContext(), "administracion", null, 1);
+                    SQLiteDatabase BaseDeDatos = admin.getWritableDatabase();
+                    Cursor fila = BaseDeDatos.rawQuery("select contrato, lectura, anomalia from lectura",null);
+                    try{
+                        String nombre_completo = Environment.getExternalStorageDirectory() + File.separator +fileName;
+                        File outputFile = new File(nombre_completo);
+                        if (outputFile.exists()){
+                            outputFile.delete();
+                        }
+                        //OutputStreamWriter archivo = new OutputStreamWriter(openFileOutput(nombre_completo, Activity.MODE_PRIVATE));
+
+                        /*------------------------------*/
+                        FileOutputStream fOut = new FileOutputStream(outputFile, true);
+                        BufferedWriter archivo = new BufferedWriter(new OutputStreamWriter(fOut));
+                        //OutputStreamWriter archivo = new OutputStreamWriter(fOut);
+                        /*------------------------------*/
+                        while (fila.moveToNext()) {
+                            archivo.write(fila.getString(0) + ", " + fila.getString(1)  + ", " + fila.getString(2));
+                            archivo.newLine();
+                        }
+                        archivo.flush();
+                        archivo.close();
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    alertDialog.dismiss();
+                }
+            });
+            alertDialog.setButton2("Cancelar", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    alertDialog.dismiss();
+                }
+            });
+            // Showing Alert Message
+            alertDialog.show();
         } else if (id == R.id.nav_send) {
             Intent salida = new Intent( Intent.ACTION_MAIN); //Llamando a la activity principal
             finish(); // La cerramos.

@@ -34,7 +34,7 @@
             android:title="@string/buton_Exportar" />
     </group>
 
-    <item android:title="Cerrar App">
+    <item android:title="@string/cerrar_app">
         <menu>
             <item
                 android:id="@+id/nav_send"

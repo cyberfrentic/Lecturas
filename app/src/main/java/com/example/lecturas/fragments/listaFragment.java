@@ -71,7 +71,9 @@ public class listaFragment extends Fragment {
             }
         }else{
             Toast.makeText(getContext(), "No hay datos", Toast.LENGTH_LONG).show();
+
         }
+        BaseDeDatos.close();
     }
 
 

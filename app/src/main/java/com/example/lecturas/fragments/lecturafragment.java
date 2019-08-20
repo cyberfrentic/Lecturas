@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.example.lecturas.AdminSQLiteOpenHelper;
 import com.example.lecturas.PadronVo;
@@ -24,6 +25,7 @@ import com.example.lecturas.R;
 import com.example.lecturas.adaptadorpadron;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -34,6 +36,7 @@ public class lecturafragment extends Fragment{
     RecyclerView listas;
     FragmentManager fragmentManager;
     capturaLecturaFragment lectura;
+    cedulaFragment cedula;
 
 
     @Override
@@ -96,6 +99,7 @@ public class lecturafragment extends Fragment{
     }
 
     private void goToCapturaLectura(String c, String m, String n, String d) {
+
         lectura = new capturaLecturaFragment();
         Bundle bundle = new Bundle();
         bundle.putString("contrato", c);
@@ -104,7 +108,21 @@ public class lecturafragment extends Fragment{
         bundle.putString("direccion", d);
         lectura.setArguments(bundle);
         fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.contenedor,lectura).addToBackStack(null).commit();
+        Calendar fecha = Calendar.getInstance();
+        int mes = fecha.get(Calendar.MONTH) + 1;
+        if (mes == 1 || mes==5 || mes== 8) {
+            cedula = new cedulaFragment();
+            Bundle bundle2 = new Bundle();
+            bundle.putString("contrato", c);
+            bundle.putString("medidor", m);
+            bundle.putString("nombre", n);
+            bundle.putString("direccion", d);
+            cedula.setArguments(bundle2);
+            fragmentManager.beginTransaction().replace(R.id.contenedor, cedula).addToBackStack(null).commit();
+
+        }else {
+            fragmentManager.beginTransaction().replace(R.id.contenedor, lectura).addToBackStack(null).commit();
+        }
     }
 }
 

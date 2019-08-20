@@ -2,10 +2,10 @@
     <string name="app_name">Lecturas</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Sistema Movil Lecturas</string>
-    <string name="nav_header_subtitle">Organismo Operador Tulum</string>
-    <string name="nav_header_desc">Navegador de toma de lecturas</string>
-    <string name="action_settings">Settings</string>
+    <string name="nav_header_title">Aplicacion Movil Comercial</string>
+    <string name="nav_header_subtitle">Comision de Agua Potable y Alcantarillado</string>
+    <string name="nav_header_desc">Navegador de App Comercial</string>
+    <string name="action_settings">Acerca de ...</string>
     <string name="etuser">Usuario</string>
     <string name="etpass">Contraseña</string>
     <string name="button">Acceder</string>
@@ -28,5 +28,30 @@
     <string name="ruta">Ruta Actual</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="generalesFragment">Datos Generales</string>
+    <string name="tarifaFragment">Datos Tarifas</string>
+    <string name="tomasFragment">Datos Tomas</string>
+    <string name="figasFragment">Datos de Fugas</string>
+
+    <string name="appbar_scriolling_view_behavior">appbar_scriolling_view_behavior</string>
+    <string name="cerrar_app">Cerrar App</string>
+
+    <!-- Fragment Generales -->
+    <string name="marco">Verificación del Predio</string>
+    <string name="genContrato">Contrato o Cuenta:</string>
+    <string name="genNombre">Nombre:</string>
+    <string name="genDireccion">Dirección:</string>
+    <string name="genCruzamientos">Cruzamientos</string>
+    <string name="genColonia">Colonia o Fracc.</string>
+    <string name="genManzana">Manzana</string>
+    <string name="genLote">Lote</string>
+    <string name="genBaldio">Lote/Ter. Baldio</string>
+    <string name="genHabitada">Casa Habitada</string>
+    <string name="genDeshabitada">Casa Deshabitada</string>
+    <string name="genComercioF">Comercio o Negocio Funcionando</string>
+    <string name="genComercioC">Comercio o Negocio Cerrado</string>
+    <string name="genOtro">Otro</string>
+    <string name="genOtroD">Descripcion de otro</string>
+    <string name="genObservaciones">Observaciones</string>
+
 </resources>

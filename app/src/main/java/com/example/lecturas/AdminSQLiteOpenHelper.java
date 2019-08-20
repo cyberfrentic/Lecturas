@@ -13,6 +13,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper{
         BaseDeDatos.execSQL("create table usuarios(user text primary key unique, pass text, nombre text)");
         BaseDeDatos.execSQL("create table padron(id int primary key unique, numloc text, contrato text, nombre text, direccion text, nummed text, tarifa text, lecant text, modif text)");
         BaseDeDatos.execSQL("create table lectura(contrato text primary key unique, lectura text, anomalia text)");
+        BaseDeDatos.execSQL("CREATE TABLE padronTotal (id int primary key unique, cuenta text, nombre text, dicreccion text, manzana text, lote text, giro text)");
 
     }
 

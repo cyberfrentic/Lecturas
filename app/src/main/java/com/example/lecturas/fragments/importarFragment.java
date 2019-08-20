@@ -56,7 +56,7 @@ public class importarFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
                 File archivo = new File(rutaArchivos.get(i));
                 if (archivo.isFile()) {
-//                    Toast.makeText(getContext(), "Has seleccionado el archivo: " + archivo.getName(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Has seleccionado el archivo: " + archivo.getName(), Toast.LENGTH_SHORT).show();
                     carpetaActual.setText(archivo.getName());
                 } else {
                     verDirectorio((rutaArchivos.get(i)));
