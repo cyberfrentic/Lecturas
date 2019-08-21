@@ -13,10 +13,6 @@ import com.example.lecturas.R;
 public class tarifasFragment extends Fragment {
 
     View vista;
-    public tarifasFragment() {
-        // Required empty public constructor
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -17,7 +17,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import com.example.lecturas.AdminSQLiteOpenHelper;
 import com.example.lecturas.PadronVo;
@@ -26,7 +25,6 @@ import com.example.lecturas.adaptadorpadron;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 
 public class lecturafragment extends Fragment{
@@ -72,15 +70,6 @@ public class lecturafragment extends Fragment{
         return vista;
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_buscador, menu);
-        MenuItem searchItem = menu.findItem(R.id.buscador);
-        SearchView searchView = (SearchView) searchItem.getActionView();
-        searchView.setOnQueryTextListener((SearchView.OnQueryTextListener) this);
-        searchView.setQueryHint("Search.. ");
-        super.onCreateOptionsMenu(menu, inflater);
-    }
 
     private void llenarListaPadron() {
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(getContext(), "administracion", null, 1);
@@ -101,26 +90,21 @@ public class lecturafragment extends Fragment{
     private void goToCapturaLectura(String c, String m, String n, String d) {
 
         lectura = new capturaLecturaFragment();
+        cedula = new cedulaFragment();
         Bundle bundle = new Bundle();
         bundle.putString("contrato", c);
         bundle.putString("medidor", m);
         bundle.putString("nombre", n);
         bundle.putString("direccion", d);
-        lectura.setArguments(bundle);
         fragmentManager = getFragmentManager();
         Calendar fecha = Calendar.getInstance();
         int mes = fecha.get(Calendar.MONTH) + 1;
         if (mes == 1 || mes==5 || mes== 8) {
-            cedula = new cedulaFragment();
-            Bundle bundle2 = new Bundle();
-            bundle.putString("contrato", c);
-            bundle.putString("medidor", m);
-            bundle.putString("nombre", n);
-            bundle.putString("direccion", d);
-            cedula.setArguments(bundle2);
+            cedula.setArguments(bundle);
             fragmentManager.beginTransaction().replace(R.id.contenedor, cedula).addToBackStack(null).commit();
 
         }else {
+            lectura.setArguments(bundle);
             fragmentManager.beginTransaction().replace(R.id.contenedor, lectura).addToBackStack(null).commit();
         }
     }

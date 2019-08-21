@@ -17,34 +17,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                android:text="@string/marco"
-                android:textSize="24sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <CheckBox
-                android:id="@+id/checkContrato"
+                android:id="@+id/tvContrato"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -56,8 +29,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:enabled="false"
                 android:hint="@string/genContrato"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -70,16 +45,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/genNombre" />
+                android:text="@string/genNombre"
+                android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/editText7"
+                android:id="@+id/etNombre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:enabled="false"
                 android:hint="@string/genNombre"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -88,20 +66,23 @@
             android:orientation="horizontal">
 
             <CheckBox
-                android:id="@+id/checkBox7"
+                android:id="@+id/checkDireccion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/genDireccion" />
+                android:text="@string/genDireccion"
+                android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/editText8"
+                android:id="@+id/etDireccion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:enabled="false"
                 android:hint="@string/genDireccion"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -110,20 +91,23 @@
             android:orientation="horizontal">
 
             <CheckBox
-                android:id="@+id/checkBox8"
+                android:id="@+id/checkCruzamientos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/genCruzamientos" />
+                android:text="@string/genCruzamientos"
+                android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/editText9"
+                android:id="@+id/etCruzamientos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:enabled="false"
                 android:hint="@string/genCruzamientos"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -132,20 +116,23 @@
             android:orientation="horizontal">
 
             <CheckBox
-                android:id="@+id/checkBox9"
+                android:id="@+id/checkColonia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/genColonia" />
+                android:text="@string/genColonia"
+                android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/editText10"
+                android:id="@+id/etColonia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:enabled="false"
                 android:hint="@string/genColonia"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -154,20 +141,23 @@
             android:orientation="horizontal">
 
             <CheckBox
-                android:id="@+id/checkBox10"
+                android:id="@+id/checkManzana"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/genManzana" />
+                android:text="@string/genManzana"
+                android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/editText11"
+                android:id="@+id/etManzana"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:enabled="false"
                 android:hint="@string/genManzana"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -176,20 +166,23 @@
             android:orientation="horizontal">
 
             <CheckBox
-                android:id="@+id/checkBox11"
+                android:id="@+id/checkLote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/genLote" />
+                android:text="@string/genLote"
+                android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/editText12"
+                android:id="@+id/etLote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:enabled="false"
                 android:hint="@string/genLote"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -197,69 +190,68 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+            <RadioGroup
+                android:id="@+id/radioGroup1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-                <CheckBox
-                    android:id="@+id/checkBox12"
+
+                <RadioButton
+                    android:id="@+id/rbBaldio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/genBaldio" />
+                    android:text="@string/genBaldio"
+                    android:textSize="14sp" />
 
-                <CheckBox
-                    android:id="@+id/checkBox13"
+                <RadioButton
+                    android:id="@+id/rbHabitada"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/genHabitada" />
+                    android:text="@string/genHabitada"
+                    android:textSize="14sp" />
 
-                <CheckBox
-                    android:id="@+id/checkBox14"
+                <RadioButton
+                    android:id="@+id/rbDeshabitada"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/genDeshabitada" />
-            </LinearLayout>
+                    android:text="@string/genDeshabitada"
+                    android:textSize="14sp" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
 
-                <CheckBox
-                    android:id="@+id/checkBox15"
+                <RadioButton
+                    android:id="@+id/rbComercioF"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/genComercioF" />
+                    android:text="@string/genComercioF"
+                    android:textSize="14sp" />
 
-                <CheckBox
-                    android:id="@+id/checkBox16"
+                <RadioButton
+                    android:id="@+id/rbComercioC"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/genComercioC" />
+                    android:text="@string/genComercioC"
+                    android:textSize="14sp" />
 
-                <LinearLayout
+
+                <RadioButton
+                    android:id="@+id/rbOtro"
+                    android:layout_width="125dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/genOtro"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/etOtro"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <CheckBox
-                        android:id="@+id/checkBox17"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/genOtro" />
-
-                    <EditText
-                        android:id="@+id/editText13"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:hint="@string/genOtroD"
-                        android:inputType="textPersonName" />
-                </LinearLayout>
-
-            </LinearLayout>
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:hint="@string/genOtroD"
+                    android:inputType="textPersonName"
+                    android:textSize="14sp" />
+            </RadioGroup>
         </LinearLayout>
 
         <LinearLayout
@@ -267,20 +259,15 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/genObservaciones" />
-
             <EditText
                 android:id="@+id/editText14"
                 android:layout_width="match_parent"
-                android:layout_height="103dp"
+                android:layout_height="96dp"
                 android:ems="10"
                 android:gravity="start|top"
                 android:hint="@string/genObservaciones"
-                android:inputType="textMultiLine" />
+                android:inputType="textMultiLine"
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

@@ -1,8 +1,7 @@
 package com.example.lecturas.fragments;
 
-import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
@@ -23,27 +22,19 @@ public class cedulaFragment extends Fragment {
     private AppBarLayout appBar;
     private TabLayout pestanas;
     private ViewPager viewPager;
-
-    public cedulaFragment() {
-        // Required empty public constructor
-    }
-
-       public static cedulaFragment newInstance(String param1, String param2) {
-        cedulaFragment fragment = new cedulaFragment();
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
+    private String contrato;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         vista = inflater.inflate(R.layout.fragment_cedula, container, false);
+
+        // ############## paso de variables globales ##################
+        Utilidades.contrato = getArguments().getString("contrato");
+        Utilidades.nombre = getArguments().getString("nombre");
+        Utilidades.direccion = getArguments().getString("direccion");
+        //############### fin de paso de variables globales ############
 
 
         if (Utilidades.rotacion==0){
@@ -71,6 +62,8 @@ public class cedulaFragment extends Fragment {
         return vista;
     }
 
+
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -85,7 +78,6 @@ public class cedulaFragment extends Fragment {
         adapter.addFragment(new tarifasFragment(), "Datos Tarifas");
         adapter.addFragment(new tomasFragment(), "Datos Tomas");
         adapter.addFragment(new fugasFragment(), "Datos Fugas");
-
         viewPager.setAdapter(adapter);
     }
 
