@@ -64,58 +64,57 @@
                     android:orientation="vertical">
 
                     <Switch
-                        android:id="@+id/switch1"
+                        android:id="@+id/nMedidor"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/numMedidor" />
 
                     <EditText
-                        android:id="@+id/editText4"
+                        android:id="@+id/etMedidor"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
-                        android:inputType="textPersonName"
-                        android:textSize="14sp"
-                        android:visibility="invisible" />
+                        android:inputType="number"
+                        android:visibility="gone" />
 
                     <Switch
-                        android:id="@+id/switch2"
+                        android:id="@+id/mFuncionando"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/mFuncionando" />
 
                     <Switch
-                        android:id="@+id/switch3"
+                        android:id="@+id/mDescompuesto"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/mDescompuesto" />
 
                     <Switch
-                        android:id="@+id/switch4"
+                        android:id="@+id/mDesconectado"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/mDesconectado" />
 
                     <Switch
-                        android:id="@+id/switch5"
+                        android:id="@+id/mRobado"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/mRobado" />
 
                     <Switch
-                        android:id="@+id/switch6"
+                        android:id="@+id/mInaccesible"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/mInaccesible" />
 
                     <Spinner
-                        android:id="@+id/spinner"
+                        android:id="@+id/tomasspinner"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="invisible" />
+                        android:visibility="gone" />
 
                     <Switch
-                        android:id="@+id/switch7"
+                        android:id="@+id/mCancelado"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/mCancelado" />
@@ -172,25 +171,25 @@
                     android:orientation="vertical">
 
                     <Switch
-                        android:id="@+id/switch8"
+                        android:id="@+id/tDirecta"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/tDirecta" />
 
                     <Switch
-                        android:id="@+id/switch9"
+                        android:id="@+id/tCancelada"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/tCancelada" />
 
                     <Switch
-                        android:id="@+id/switch10"
+                        android:id="@+id/tCoL"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/cOLote" />
 
                     <Switch
-                        android:id="@+id/switch11"
+                        android:id="@+id/tClandestina"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/tClandestina" />
@@ -246,25 +245,25 @@
                     android:orientation="vertical">
 
                     <Switch
-                        android:id="@+id/switch12"
+                        android:id="@+id/dMCancelado"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/dMCancelado" />
 
                     <Switch
-                        android:id="@+id/switch13"
+                        android:id="@+id/dTCancelada"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/dTcancelada" />
 
                     <Switch
-                        android:id="@+id/switch14"
+                        android:id="@+id/dTCoL"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/dConectadaOL" />
 
                     <Switch
-                        android:id="@+id/switch15"
+                        android:id="@+id/dTClandestina"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/dtClandestina" />

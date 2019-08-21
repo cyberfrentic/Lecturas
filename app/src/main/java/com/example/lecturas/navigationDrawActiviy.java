@@ -109,8 +109,15 @@ public class navigationDrawActiviy extends AppCompatActivity
             navigationView.getMenu().findItem(R.id.importar).setVisible(false);
             navigationView.getMenu().findItem(R.id.exportar).setVisible(false);
         }
+        Calendar fecha = Calendar.getInstance();
+        int mes = fecha.get(Calendar.MONTH) + 1;
+        if (mes == 1 || mes==5 || mes== 9) {
+            navigationView.getMenu().findItem(R.id.nav_share).setVisible(true);
+        }else{
+            navigationView.getMenu().findItem(R.id.nav_share).setVisible(false);
+        }
         navigationView.getMenu().findItem(R.id.nav_tools).setVisible(false);
-        navigationView.getMenu().findItem(R.id.nav_share).setVisible(false);
+
 
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -175,7 +182,7 @@ public class navigationDrawActiviy extends AppCompatActivity
         } else if (id == R.id.nav_tools) {
 //            fm.beginTransaction().replace(R.id.contenedor, new editarFragment()).commit();
         } else if (id == R.id.nav_share) {
-//            fm.beginTransaction().replace(R.id.contenedor, new medidoresFragment()).commit();
+           fm.beginTransaction().replace(R.id.contenedor, new cedulaFragment()).addToBackStack(null).commit();
         } else if (id == R.id.importar) {
             fm.beginTransaction().replace(R.id.contenedor, new importarFragment()).addToBackStack(null).commit();
         } else if (id == R.id.exportar) {

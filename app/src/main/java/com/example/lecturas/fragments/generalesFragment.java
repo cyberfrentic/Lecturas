@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 
 import com.example.lecturas.R;
-import com.example.lecturas.clases.Utilidades;
+//import com.example.lecturas.clases.Utilidades;
 
 
 public class generalesFragment extends Fragment {
@@ -50,9 +50,9 @@ public class generalesFragment extends Fragment {
         rbOtro = (RadioButton) vista.findViewById(R.id.rbOtro);
         etOtro = (EditText) vista.findViewById(R.id.etOtro);
 
-        etContrato.setText(Utilidades.contrato);
-        etNombre.setText(Utilidades.nombre);
-        etDireccion.setText(Utilidades.direccion);
+//        etContrato.setText(Utilidades.contrato);
+//        etNombre.setText(Utilidades.nombre);
+//        etDireccion.setText(Utilidades.direccion);
 
         checkNombre.setOnClickListener(new View.OnClickListener() {
             @Override

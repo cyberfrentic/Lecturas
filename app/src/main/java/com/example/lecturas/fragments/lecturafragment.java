@@ -90,23 +90,15 @@ public class lecturafragment extends Fragment{
     private void goToCapturaLectura(String c, String m, String n, String d) {
 
         lectura = new capturaLecturaFragment();
-        cedula = new cedulaFragment();
         Bundle bundle = new Bundle();
         bundle.putString("contrato", c);
         bundle.putString("medidor", m);
         bundle.putString("nombre", n);
         bundle.putString("direccion", d);
         fragmentManager = getFragmentManager();
-        Calendar fecha = Calendar.getInstance();
-        int mes = fecha.get(Calendar.MONTH) + 1;
-        if (mes == 1 || mes==5 || mes== 8) {
-            cedula.setArguments(bundle);
-            fragmentManager.beginTransaction().replace(R.id.contenedor, cedula).addToBackStack(null).commit();
+        lectura.setArguments(bundle);
+        fragmentManager.beginTransaction().replace(R.id.contenedor, lectura).addToBackStack(null).commit();
 
-        }else {
-            lectura.setArguments(bundle);
-            fragmentManager.beginTransaction().replace(R.id.contenedor, lectura).addToBackStack(null).commit();
-        }
     }
 }
 

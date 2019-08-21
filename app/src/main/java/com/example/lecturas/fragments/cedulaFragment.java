@@ -22,19 +22,12 @@ public class cedulaFragment extends Fragment {
     private AppBarLayout appBar;
     private TabLayout pestanas;
     private ViewPager viewPager;
-    private String contrato;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         vista = inflater.inflate(R.layout.fragment_cedula, container, false);
-
-        // ############## paso de variables globales ##################
-        Utilidades.contrato = getArguments().getString("contrato");
-        Utilidades.nombre = getArguments().getString("nombre");
-        Utilidades.direccion = getArguments().getString("direccion");
-        //############### fin de paso de variables globales ############
 
 
         if (Utilidades.rotacion==0){
