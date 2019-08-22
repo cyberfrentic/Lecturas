@@ -26,6 +26,7 @@ import com.example.lecturas.fragments.homeFragment;
 import com.example.lecturas.fragments.importarFragment;
 import com.example.lecturas.fragments.lecturafragment;
 import com.example.lecturas.fragments.listaFragment;
+import com.example.lecturas.fragments.preCedFragment;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
@@ -57,11 +58,9 @@ public class navigationDrawActiviy extends AppCompatActivity
         switch (opcion){
             case 1: fm.beginTransaction().replace(R.id.contenedor, new homeFragment()).commit();break;
             case 2: fm.beginTransaction().replace(R.id.contenedor, new lecturafragment()).addToBackStack(null).commit();break;
-            case 3: fm.beginTransaction().replace(R.id.contenedor, new homeFragment()).addToBackStack(null).commit();break;
-            case 4: fm.beginTransaction().replace(R.id.contenedor, new homeFragment()).addToBackStack(null).commit();break;
-            case 5: fm.beginTransaction().replace(R.id.contenedor, new homeFragment()).addToBackStack(null).commit();break;
-            case 6: fm.beginTransaction().replace(R.id.contenedor, new importarFragment()).addToBackStack(null).commit();break;
-            case 7: fm.beginTransaction().replace(R.id.contenedor, new homeFragment()).addToBackStack(null).commit();break;
+            case 3: fm.beginTransaction().replace(R.id.contenedor, new listaFragment()).addToBackStack(null).commit();break;
+            case 4: fm.beginTransaction().replace(R.id.contenedor, new preCedFragment()).addToBackStack(null).commit();break;
+            case 5: fm.beginTransaction().replace(R.id.contenedor, new importarFragment()).addToBackStack(null).commit();break;
             default:  fm.beginTransaction().replace(R.id.contenedor, new homeFragment()).addToBackStack(null).commit();break;
         }
 
@@ -106,7 +105,7 @@ public class navigationDrawActiviy extends AppCompatActivity
                 Snackbar.make(view, "Cedula de Verificación de Predios", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 FragmentManager fm = getSupportFragmentManager();
-                fm.beginTransaction().replace(R.id.contenedor, new cedulaFragment()).addToBackStack(null).commit();
+                fm.beginTransaction().replace(R.id.contenedor, new preCedFragment()).addToBackStack(null).commit();
                 menuBotones.collapse();
 
 
@@ -198,7 +197,7 @@ public class navigationDrawActiviy extends AppCompatActivity
         } else if (id == R.id.nav_tools) {
 //            fm.beginTransaction().replace(R.id.contenedor, new editarFragment()).commit();
         } else if (id == R.id.nav_share) {
-           fm.beginTransaction().replace(R.id.contenedor, new cedulaFragment()).addToBackStack(null).commit();
+           fm.beginTransaction().replace(R.id.contenedor, new preCedFragment()).addToBackStack(null).commit();
         } else if (id == R.id.importar) {
             fm.beginTransaction().replace(R.id.contenedor, new importarFragment()).addToBackStack(null).commit();
         } else if (id == R.id.exportar) {

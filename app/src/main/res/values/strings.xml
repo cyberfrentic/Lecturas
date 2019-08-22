@@ -55,7 +55,7 @@
     <string name="genObservaciones">Observaciones</string>
 
     <!-- Fragment Tarifas -->
-    <string name="tituloTarifa">Tipo de Tarifa</string>
+    <string name="tituloTarifa">Tipo de Tarifa    :</string>
     <string name="subtitulo1">Información del Sistema</string>
     <string name="subtitulo2">Verificación Física</string>
     <string name="domestico">Domestico</string>
@@ -70,24 +70,27 @@
 
     <!-- Fragment Tomas -->
     <string name="tituloTomas">Tomas</string>
-        <string name="medidor">Medidor</string>
-            <string name="numMedidor">Núm. Medidor</string>
-            <string name="mFuncionando">Medidor Funcionando</string>
-            <string name="mDescompuesto">Medidor Descompuesto</string>
-            <string name="mDesconectado">Medidor Desconectado - con Agua Directo</string>
-            <string name="mRobado">Medidor Robado</string>
-            <string name="mInaccesible">Medidor Inaccesible</string>
-            <string name="mCancelado">Medidor Cancelado</string>
-        <string name="tDirecta">Toma Directa</string>
-            <string name="tomaDirecta">Toma Directa</string>
-            <string name="tCancelada">Toma Cancelada</string>
-            <string name="cOLote">Conectada a Otro Lote</string>
-            <string name="tClandestina">Toma Clandestino, Conectado directo a la Red</string>
-        <string name="Draef">D R A E F</string>
-            <string name="dMCancelado">Medidor Cancelado Sin Agua</string>
-            <string name="dTcancelada">Toma Cancelada Sin Agua</string>
-            <string name="dConectadaOL">Conectado a otro Lote</string>
-            <string name="dtClandestina">Toma Clandestino, Conectado directo a la Red</string>
+    <string name="medidor">Medidor</string>
+    <string name="numMedidor">Núm. Medidor</string>
+    <string name="mFuncionando">Medidor Funcionando</string>
+    <string name="mDescompuesto">Medidor Descompuesto</string>
+    <string name="mDesconectado">Medidor Desconectado - con Agua Directo</string>
+    <string name="mRobado">Medidor Robado</string>
+    <string name="mInaccesible">Medidor Inaccesible</string>
+    <string name="mCancelado">Medidor Cancelado</string>
+    <string name="tDirecta">Toma Directa</string>
+    <string name="tomaDirecta">Toma Directa</string>
+    <string name="tCancelada">Toma Cancelada</string>
+    <string name="cOLote">Conectada a Otro Lote</string>
+    <string name="tClandestina">Toma Clandestino, Conectado directo a la Red</string>
+    <string name="Draef">D R A E F</string>
+    <string name="dMCancelado">Medidor Cancelado Sin Agua</string>
+    <string name="dTcancelada">Toma Cancelada Sin Agua</string>
+    <string name="dConectadaOL">Conectado a otro Lote</string>
+    <string name="dtClandestina">Toma Clandestino, Conectado directo a la Red</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

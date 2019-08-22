@@ -40,52 +40,41 @@
                 android:layout_height="1dp"
                 android:background="?android:attr/listDivider" />
 
-            <RadioGroup
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/radioButton"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/domestico" />
+                    android:orientation="vertical">
 
-                <RadioButton
-                    android:id="@+id/radioButton2"
+                    <TextView
+                        android:id="@+id/textView35"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/tituloTarifa" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/comercial" />
+                    android:orientation="vertical">
 
-                <RadioButton
-                    android:id="@+id/radioButton3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/hotelero" />
+                    <TextView
+                        android:id="@+id/tTarifa"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TextView" />
+                </LinearLayout>
 
-                <RadioButton
-                    android:id="@+id/radioButton4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/industrial" />
-
-                <RadioButton
-                    android:id="@+id/radioButton5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/serGenerals" />
-
-                <RadioButton
-                    android:id="@+id/radioButton6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/sContrato" />
-
-            </RadioGroup>
+            </LinearLayout>
 
             <View
-                android:id="@+id/divider5"
+                android:id="@+id/divider"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="5dp"
                 android:background="?android:attr/listDivider" />
 
             <TextView
@@ -95,9 +84,9 @@
                 android:text="@string/subtitulo2" />
 
             <View
-                android:id="@+id/divider"
+                android:id="@+id/divider5"
                 android:layout_width="match_parent"
-                android:layout_height="5dp"
+                android:layout_height="1dp"
                 android:background="?android:attr/listDivider" />
 
             <RadioGroup
@@ -154,15 +143,10 @@
                 android:text="@string/subtitulo3"
                 android:textAlignment="center" />
 
-            <EditText
-                android:id="@+id/editText"
+            <Spinner
+                android:id="@+id/spTipoUso"
                 android:layout_width="match_parent"
-                android:layout_height="126dp"
-                android:ems="10"
-                android:gravity="start|top"
-                android:hint="@string/contenido"
-                android:inputType="textMultiLine"
-                android:textSize="14sp" />
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
     </ScrollView>

@@ -12,7 +12,7 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 
 import com.example.lecturas.R;
-//import com.example.lecturas.clases.Utilidades;
+import com.example.lecturas.clases.Utilidades;
 
 
 public class generalesFragment extends Fragment {
@@ -41,7 +41,6 @@ public class generalesFragment extends Fragment {
         etNombre = (EditText) vista.findViewById(R.id.etNombre);
         etDireccion = (EditText) vista.findViewById(R.id.etDireccion);
         etCruzamientos = (EditText) vista.findViewById(R.id.etCruzamientos);
-        etColonia = (Spinner) vista.findViewById(R.id.etColonia);
         etManzana = (EditText) vista.findViewById(R.id.etManzana);
         etLote = (EditText) vista.findViewById(R.id.etLote);
 
@@ -52,8 +51,7 @@ public class generalesFragment extends Fragment {
         rbComercioC = (RadioButton) vista.findViewById(R.id.rbComercioC);
         rbOtro = (RadioButton) vista.findViewById(R.id.rbOtro);
 
-        etColonia.setEnabled(false);
-        etColonia.setClickable(false);
+
 
         //#################### Adapter del spiner OTRO ##################
         spinner = (Spinner) vista.findViewById(R.id.etOtro);
@@ -67,8 +65,12 @@ public class generalesFragment extends Fragment {
         String [] opciones= {"Elije una Colonia","Centro", "Fco. May", "J. Bautista V.", "Constituyentes", "Benito Juarez", "Cecilio C.", "Lazaro Cardenas", "Rafael E. M.", "Javier Rojo G.", "Leona Vicario", "J. Martinez R.", "Emiliano Z. I", "Emiliano Z. II", "Plan de Ayala", "Plan de Ayutla", "Plan de Gpe.", "Plan de la Noria"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item_anomalia, opciones);
         etColonia.setAdapter(adapter);
+        etColonia.setEnabled(false);
+        etColonia.setClickable(false);
         //###########################################################
-
+        if (Utilidades.contrato.toString() != "Sin Contrato") {
+            etContrato.setText(Utilidades.contrato);
+        }
 
         checkNombre.setOnClickListener(new View.OnClickListener() {
             @Override

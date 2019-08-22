@@ -34,7 +34,6 @@ public class lecturafragment extends Fragment{
     RecyclerView listas;
     FragmentManager fragmentManager;
     capturaLecturaFragment lectura;
-    cedulaFragment cedula;
 
 
     @Override

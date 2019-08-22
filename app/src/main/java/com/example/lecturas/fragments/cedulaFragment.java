@@ -1,6 +1,5 @@
 package com.example.lecturas.fragments;
 
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
