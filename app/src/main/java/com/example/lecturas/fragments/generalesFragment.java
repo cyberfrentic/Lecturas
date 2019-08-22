@@ -5,9 +5,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 
 import com.example.lecturas.R;
 //import com.example.lecturas.clases.Utilidades;
@@ -17,8 +19,9 @@ public class generalesFragment extends Fragment {
 
     private View vista;
     private CheckBox checkNombre, checkDireccion, checkCruzamientos, checkColonia, checkManzana,checkLote;
-    private EditText etContrato,etNombre, etDireccion, etCruzamientos, etColonia, etManzana, etLote, etOtro;
+    private EditText etContrato,etNombre, etDireccion, etCruzamientos, etManzana, etLote;
     private RadioButton rbBaldio, rbHabitada, rbDesabitada, rbComercioF, rbComercioC, rbOtro;
+    private Spinner spinner, etColonia;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,7 +41,7 @@ public class generalesFragment extends Fragment {
         etNombre = (EditText) vista.findViewById(R.id.etNombre);
         etDireccion = (EditText) vista.findViewById(R.id.etDireccion);
         etCruzamientos = (EditText) vista.findViewById(R.id.etCruzamientos);
-        etColonia = (EditText) vista.findViewById(R.id.etColonia);
+        etColonia = (Spinner) vista.findViewById(R.id.etColonia);
         etManzana = (EditText) vista.findViewById(R.id.etManzana);
         etLote = (EditText) vista.findViewById(R.id.etLote);
 
@@ -48,11 +51,24 @@ public class generalesFragment extends Fragment {
         rbComercioF = (RadioButton) vista.findViewById(R.id.rbComercioF);
         rbComercioC = (RadioButton) vista.findViewById(R.id.rbComercioC);
         rbOtro = (RadioButton) vista.findViewById(R.id.rbOtro);
-        etOtro = (EditText) vista.findViewById(R.id.etOtro);
 
-//        etContrato.setText(Utilidades.contrato);
-//        etNombre.setText(Utilidades.nombre);
-//        etDireccion.setText(Utilidades.direccion);
+        etColonia.setEnabled(false);
+        etColonia.setClickable(false);
+
+        //#################### Adapter del spiner OTRO ##################
+        spinner = (Spinner) vista.findViewById(R.id.etOtro);
+        String [] opciones2= {"Elije una Opcion","Renta", "Prestamo", "Cuartería", "Intestada", "Embargada(Banco)"};
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getContext(), R.layout.spinner_item_anomalia, opciones2);
+        spinner.setAdapter(adapter2);
+        //###########################################################
+
+        //#################### Adapter del spiner COLONIA##################
+        etColonia = (Spinner) vista.findViewById(R.id.etColonia);
+        String [] opciones= {"Elije una Colonia","Centro", "Fco. May", "J. Bautista V.", "Constituyentes", "Benito Juarez", "Cecilio C.", "Lazaro Cardenas", "Rafael E. M.", "Javier Rojo G.", "Leona Vicario", "J. Martinez R.", "Emiliano Z. I", "Emiliano Z. II", "Plan de Ayala", "Plan de Ayutla", "Plan de Gpe.", "Plan de la Noria"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item_anomalia, opciones);
+        etColonia.setAdapter(adapter);
+        //###########################################################
+
 
         checkNombre.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,7 +141,9 @@ public class generalesFragment extends Fragment {
         rbOtro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                etOtro.setEnabled(true);
+                if (rbOtro.isChecked()) {
+                    spinner.setVisibility(View.VISIBLE);
+                }
             }
         });
 
@@ -155,8 +173,10 @@ public class generalesFragment extends Fragment {
     private void veriCol(){
         if (checkColonia.isChecked()){
             etColonia.setEnabled(true);
+            etColonia.setClickable(true);
         }else{
             etColonia.setEnabled(false);
+            etColonia.setClickable(false);
         }
     }
     private void veriMan(){
@@ -173,10 +193,7 @@ public class generalesFragment extends Fragment {
             etLote.setEnabled(false);
         }
     }
-
     private void veriEtOtro(){
-        if (etOtro.isEnabled()){
-            etOtro.setEnabled(false);
-        }
+       spinner.setVisibility(View.GONE);
     }
 }

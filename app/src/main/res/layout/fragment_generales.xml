@@ -20,6 +20,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/tvContrato"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/genContrato" />
+
                 <EditText
                     android:id="@+id/etContrato"
                     android:layout_width="wrap_content"
@@ -30,13 +37,6 @@
                     android:hint="@string/genContrato"
                     android:inputType="textPersonName"
                     android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/tvContrato"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/genContrato" />
             </LinearLayout>
 
             <LinearLayout
@@ -127,16 +127,13 @@
                     android:text="@string/genColonia"
                     android:textSize="14sp" />
 
-                <EditText
+                <Spinner
                     android:id="@+id/etColonia"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:ems="10"
-                    android:enabled="false"
-                    android:hint="@string/genColonia"
-                    android:inputType="textPersonName"
-                    android:textSize="14sp" />
+                    android:visibility="visible" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -200,17 +197,6 @@
                     android:layout_height="wrap_content">
 
 
-                    <EditText
-                        android:id="@+id/etOtro"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:enabled="false"
-                        android:hint="@string/genOtroD"
-                        android:inputType="textPersonName"
-                        android:textSize="14sp" />
-
                     <RadioButton
                         android:id="@+id/rbDeshabitada"
                         android:layout_width="match_parent"
@@ -242,6 +228,13 @@
                         android:textSize="14sp" />
 
                     <RadioButton
+                        android:id="@+id/rbHabitada"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/genHabitada"
+                        android:textSize="14sp" />
+
+                    <RadioButton
                         android:id="@+id/rbOtro"
                         android:layout_width="125dp"
                         android:layout_height="wrap_content"
@@ -249,12 +242,12 @@
                         android:text="@string/genOtro"
                         android:textSize="14sp" />
 
-                    <RadioButton
-                        android:id="@+id/rbHabitada"
+                    <Spinner
+                        android:id="@+id/etOtro"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/genHabitada"
-                        android:textSize="14sp" />
+                        android:visibility="gone" />
+
                 </RadioGroup>
             </LinearLayout>
 

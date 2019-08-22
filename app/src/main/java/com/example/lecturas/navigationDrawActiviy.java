@@ -42,6 +42,8 @@ public class navigationDrawActiviy extends AppCompatActivity
 
     //variable para guardar la opcion selccionada en el menu
     public static int opcion;
+    private Calendar fecha = Calendar.getInstance();
+    private int mes = fecha.get(Calendar.MONTH) + 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +71,9 @@ public class navigationDrawActiviy extends AppCompatActivity
         final FloatingActionButton fab1 = findViewById(R.id.fab1);
         final FloatingActionButton fab2 = findViewById(R.id.fab2);
         final FloatingActionButton fab3 = findViewById(R.id.fab3);
+        if (mes == 1 || mes==5 || mes== 8) {
+            fab3.setVisibility(View.VISIBLE);
+        }
 
         fab1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +100,18 @@ public class navigationDrawActiviy extends AppCompatActivity
 
             }
         });
+        fab3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Cedula de Verificación de Predios", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                FragmentManager fm = getSupportFragmentManager();
+                fm.beginTransaction().replace(R.id.contenedor, new cedulaFragment()).addToBackStack(null).commit();
+                menuBotones.collapse();
+
+
+            }
+        });
     //############################################################################
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -109,9 +126,8 @@ public class navigationDrawActiviy extends AppCompatActivity
             navigationView.getMenu().findItem(R.id.importar).setVisible(false);
             navigationView.getMenu().findItem(R.id.exportar).setVisible(false);
         }
-        Calendar fecha = Calendar.getInstance();
-        int mes = fecha.get(Calendar.MONTH) + 1;
-        if (mes == 1 || mes==5 || mes== 9) {
+
+        if (mes == 1 || mes==5 || mes== 8) {
             navigationView.getMenu().findItem(R.id.nav_share).setVisible(true);
         }else{
             navigationView.getMenu().findItem(R.id.nav_share).setVisible(false);

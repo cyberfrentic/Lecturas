@@ -55,10 +55,11 @@
             android:id="@+id/fab3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:fab_colorNormal="#FFC107"
             app:fab_icon="@drawable/ic_menu_manage"
             app:fab_size="mini"
-            app:fab_colorNormal="#FFC107"
-            app:fab_title="Editar Lectura"/>
+            app:fab_title="Cedula Verificación" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
