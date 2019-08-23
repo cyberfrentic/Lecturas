@@ -1,5 +1,6 @@
 package com.example.lecturas.fragments;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -72,5 +73,4 @@ public class cedulaFragment extends Fragment {
         adapter.addFragment(new fugasFragment(), "Datos Fugas");
         viewPager.setAdapter(adapter);
     }
-
    }

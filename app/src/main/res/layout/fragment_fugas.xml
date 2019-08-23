@@ -39,6 +39,11 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/textView45"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -46,18 +51,23 @@
 
                     <TextView
                         android:id="@+id/textView40"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Fuga:" />
 
                     <Spinner
                         android:id="@+id/spinner"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1" />
 
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView46"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
@@ -78,12 +88,6 @@
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
                     android:text="Foto Fuga" />
-
-                <ImageView
-                    android:id="@+id/imageView6"
-                    android:layout_width="match_parent"
-                    android:layout_height="319dp"
-                    android:src="@drawable/ic_menu_camera" />
 
                 <Button
                     android:id="@+id/btFoto"
@@ -107,6 +111,12 @@
                     android:id="@+id/textView43"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
+
+                <View
+                    android:id="@+id/divider10"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="?android:attr/listDivider" />
 
                 <Button
                     android:id="@+id/btGuardar"

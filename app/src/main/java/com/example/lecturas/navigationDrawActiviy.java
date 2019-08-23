@@ -1,13 +1,18 @@
 package com.example.lecturas;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.text.format.Time;
 import android.view.View;
@@ -45,6 +50,7 @@ public class navigationDrawActiviy extends AppCompatActivity
     public static int opcion;
     private Calendar fecha = Calendar.getInstance();
     private int mes = fecha.get(Calendar.MONTH) + 1;
+    final private int REQUEST_CODE_ASK_PERMISSION=111;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +58,7 @@ public class navigationDrawActiviy extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        solicitarPermisos();
 
         // capturar la opcion seleccionada en el menu segun el fragment expuesto
         FragmentManager fm = getSupportFragmentManager();
@@ -144,6 +151,16 @@ public class navigationDrawActiviy extends AppCompatActivity
 
     }
 
+    private void solicitarPermisos() {
+        int permisoRES = ActivityCompat.checkSelfPermission(navigationDrawActiviy.this, Manifest.permission.READ_EXTERNAL_STORAGE);
+        int permisoWES = ActivityCompat.checkSelfPermission(navigationDrawActiviy.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int permisoCam = ActivityCompat.checkSelfPermission(navigationDrawActiviy.this, Manifest.permission.CAMERA);
+        if(permisoRES != PackageManager.PERMISSION_GRANTED || permisoWES != PackageManager.PERMISSION_GRANTED || permisoCam != PackageManager.PERMISSION_GRANTED){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, REQUEST_CODE_ASK_PERMISSION);
+            }
+        }
+    }
 
 
     @Override
