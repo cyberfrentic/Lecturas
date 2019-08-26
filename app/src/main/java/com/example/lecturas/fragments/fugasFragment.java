@@ -38,7 +38,7 @@ public class fugasFragment extends Fragment {
     View vista;
     Spinner spinner;
     Button btTomarFoto, btGuradar;
-    ImageView imagen;
+    ImageView imagenID;
     private Calendar fecha = Calendar.getInstance();
     private int mes = fecha.get(Calendar.MONTH) + 1;
     String path;
@@ -50,7 +50,7 @@ public class fugasFragment extends Fragment {
         // Inflate the layout for this fragment
         vista = inflater.inflate(R.layout.fragment_fugas, container, false);
 
-        //imagen = (ImageView) vista.findViewById(R.id.imagenID);
+        imagenID = (ImageView) vista.findViewById(R.id.imagenID);
 
         //#################### Adapter del spiner COLONIA##################
         spinner = (Spinner) vista.findViewById(R.id.spinner);
@@ -101,11 +101,9 @@ public class fugasFragment extends Fragment {
             }
             // Continue only if the File was successfully created
             if (photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(getActivity(),
-                        "com.example.android.fileprovider",
-                        photoFile);
+                Uri photoURI = FileProvider.getUriForFile(getActivity(),"com.example.android.fileprovider", photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-
+                Utilidades.uris=photoURI;
                 startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
 
 
@@ -118,8 +116,10 @@ public class fugasFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
+            if(Utilidades.uris != null){
+                imagenID.setImageURI(Utilidades.uris);
                 Toast.makeText(getContext(),"foto tomada", Toast.LENGTH_LONG).show();
-
+            }
         }
     }
 

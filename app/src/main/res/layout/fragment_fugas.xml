@@ -89,6 +89,12 @@
                     android:textAlignment="center"
                     android:text="Foto Fuga" />
 
+                <ImageView
+                    android:id="@+id/imagenID"
+                    android:layout_width="match_parent"
+                    android:layout_height="319dp"
+                    android:src="@drawable/ic_menu_camera" />
+
                 <Button
                     android:id="@+id/btFoto"
                     android:layout_width="match_parent"
