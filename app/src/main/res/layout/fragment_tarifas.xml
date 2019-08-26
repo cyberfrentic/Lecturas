@@ -65,8 +65,7 @@
                     <TextView
                         android:id="@+id/tTarifa"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="TextView" />
+                        android:layout_height="wrap_content" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -147,6 +146,23 @@
                 android:id="@+id/spTipoUso"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView47"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/btGuardarTar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Guardar pasar Siguiente" />
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

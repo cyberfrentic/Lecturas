@@ -6,22 +6,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.lecturas.R;
 import com.example.lecturas.clases.Utilidades;
+
+import static com.example.lecturas.fragments.cedulaFragment.viewPager;
 
 
 public class generalesFragment extends Fragment {
 
     private View vista;
-    private CheckBox checkNombre, checkDireccion, checkCruzamientos, checkColonia, checkManzana,checkLote;
-    private EditText etContrato,etNombre, etDireccion, etCruzamientos, etManzana, etLote;
+    private CheckBox checkNombre, checkDireccion, checkCruzamientos, checkColonia, checkManzana, checkLote;
+    private EditText etContrato, etNombre, etDireccion, etCruzamientos, etManzana, etLote;
     private RadioButton rbBaldio, rbHabitada, rbDesabitada, rbComercioF, rbComercioC, rbOtro;
     private Spinner spinner, etColonia;
+    private Button btGuardarGen;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,19 +55,19 @@ public class generalesFragment extends Fragment {
         rbComercioF = (RadioButton) vista.findViewById(R.id.rbComercioF);
         rbComercioC = (RadioButton) vista.findViewById(R.id.rbComercioC);
         rbOtro = (RadioButton) vista.findViewById(R.id.rbOtro);
-
+        btGuardarGen = (Button) vista.findViewById(R.id.btGuardarGen);
 
 
         //#################### Adapter del spiner OTRO ##################
         spinner = (Spinner) vista.findViewById(R.id.etOtro);
-        String [] opciones2= {"Elije una Opcion","Renta", "Prestamo", "Cuartería", "Intestada", "Embargada(Banco)"};
+        String[] opciones2 = {"Elije una Opcion", "Renta", "Prestamo", "Cuartería", "Intestada", "Embargada(Banco)"};
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getContext(), R.layout.spinner_item_anomalia, opciones2);
         spinner.setAdapter(adapter2);
         //###########################################################
 
         //#################### Adapter del spiner COLONIA##################
         etColonia = (Spinner) vista.findViewById(R.id.etColonia);
-        String [] opciones= {"Elije una Colonia","Centro", "Fco. May", "J. Bautista V.", "Constituyentes", "Benito Juarez", "Cecilio C.", "Lazaro Cardenas", "Rafael E. M.", "Javier Rojo G.", "Leona Vicario", "J. Martinez R.", "Emiliano Z. I", "Emiliano Z. II", "Plan de Ayala", "Plan de Ayutla", "Plan de Gpe.", "Plan de la Noria"};
+        String[] opciones = {"Elije una Colonia", "Centro", "Fco. May", "J. Bautista V.", "Constituyentes", "Benito Juarez", "Cecilio C.", "Lazaro Cardenas", "Rafael E. M.", "Javier Rojo G.", "Leona Vicario", "J. Martinez R.", "Emiliano Z. I", "Emiliano Z. II", "Plan de Ayala", "Plan de Ayutla", "Plan de Gpe.", "Plan de la Noria"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item_anomalia, opciones);
         etColonia.setAdapter(adapter);
         etColonia.setEnabled(false);
@@ -149,8 +154,38 @@ public class generalesFragment extends Fragment {
             }
         });
 
+        btGuardarGen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Utilidades.GenNombre = etNombre.getText().toString();
+                Utilidades.Gendireccion = etDireccion.getText().toString();
+                Utilidades.GenCruzamientos = etCruzamientos.getText().toString();
+                Utilidades.GenColonia = etColonia.getSelectedItem().toString();
+                Utilidades.GenManzna = etManzana.getText().toString();
+                Utilidades.GenLote = etLote.getText().toString();
+                if(rbBaldio.isChecked()){
+                    Utilidades.GenOpciones = "Baldio";
+                }else if(rbHabitada.isChecked()){
+                    Utilidades.GenOpciones = "Habitada";
+                }else if(rbDesabitada.isChecked()){
+                    Utilidades.GenOpciones = "DesHabitada";
+                }else if(rbComercioF.isChecked()){
+                    Utilidades.GenOpciones = "ComercioF";
+                }else if(rbComercioC.isChecked()){
+                    Utilidades.GenOpciones = "ComercioC";
+                }else if(rbOtro.isChecked()){
+                    Utilidades.GenOpciones = "Otros";
+                    Utilidades.GenOtros = spinner.getSelectedItem().toString();
+                }
+                Toast.makeText(getContext(), Utilidades.GenOpciones,Toast.LENGTH_LONG).show();
+                viewPager.setCurrentItem(1);
+            }
+        });
         return vista;
     }
+
+
+
     private void veriNombre(){
         if (checkNombre.isChecked()){
             etNombre.setEnabled(true);

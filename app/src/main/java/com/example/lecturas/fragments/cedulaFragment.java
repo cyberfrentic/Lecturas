@@ -21,7 +21,7 @@ public class cedulaFragment extends Fragment {
     View vista;
     private AppBarLayout appBar;
     private TabLayout pestanas;
-    private ViewPager viewPager;
+    public static ViewPager viewPager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

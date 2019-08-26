@@ -254,17 +254,24 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/editText14"
+                <TextView
+                    android:id="@+id/textView41"
                     android:layout_width="match_parent"
-                    android:layout_height="96dp"
-                    android:ems="10"
-                    android:gravity="start|top"
-                    android:hint="@string/genObservaciones"
-                    android:inputType="textMultiLine"
-                    android:textSize="14sp" />
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/btGuardarGen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Guardar pasar Siguiente" />
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

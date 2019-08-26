@@ -155,9 +155,11 @@ public class navigationDrawActiviy extends AppCompatActivity
         int permisoRES = ActivityCompat.checkSelfPermission(navigationDrawActiviy.this, Manifest.permission.READ_EXTERNAL_STORAGE);
         int permisoWES = ActivityCompat.checkSelfPermission(navigationDrawActiviy.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         int permisoCam = ActivityCompat.checkSelfPermission(navigationDrawActiviy.this, Manifest.permission.CAMERA);
-        if(permisoRES != PackageManager.PERMISSION_GRANTED || permisoWES != PackageManager.PERMISSION_GRANTED || permisoCam != PackageManager.PERMISSION_GRANTED){
+        int permisoLocation = ActivityCompat.checkSelfPermission(navigationDrawActiviy.this, Manifest.permission.ACCESS_FINE_LOCATION);
+        int pemisoInternet = ActivityCompat.checkSelfPermission(navigationDrawActiviy.this, Manifest.permission.INTERNET);
+        if(permisoRES != PackageManager.PERMISSION_GRANTED || permisoWES != PackageManager.PERMISSION_GRANTED || permisoCam != PackageManager.PERMISSION_GRANTED || permisoLocation != PackageManager.PERMISSION_GRANTED || pemisoInternet != PackageManager.PERMISSION_GRANTED){
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, REQUEST_CODE_ASK_PERMISSION);
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.INTERNET}, REQUEST_CODE_ASK_PERMISSION);
             }
         }
     }

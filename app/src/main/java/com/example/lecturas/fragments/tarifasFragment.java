@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import com.example.lecturas.R;
@@ -14,6 +15,8 @@ public class tarifasFragment extends Fragment {
 
     View vista;
     private Spinner spinner;
+    private Button btGuardarTar;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -26,6 +29,7 @@ public class tarifasFragment extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item_anomalia, opciones);
         spinner.setAdapter(adapter);
         //###########################################################
+
         return vista;
     }
 }
