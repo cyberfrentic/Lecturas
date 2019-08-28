@@ -93,37 +93,37 @@
                 android:layout_height="wrap_content">
 
                 <RadioButton
-                    android:id="@+id/radioButton7"
+                    android:id="@+id/rbTDomestico"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/domestico" />
 
                 <RadioButton
-                    android:id="@+id/radioButton8"
+                    android:id="@+id/rbTComercial"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/comercial" />
 
                 <RadioButton
-                    android:id="@+id/radioButton9"
+                    android:id="@+id/rbTHotelero"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/hotelero" />
 
                 <RadioButton
-                    android:id="@+id/radioButton10"
+                    android:id="@+id/rbTIndustrial"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/industrial" />
 
                 <RadioButton
-                    android:id="@+id/radioButton11"
+                    android:id="@+id/rbTServGen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/serGenerals" />
 
                 <RadioButton
-                    android:id="@+id/radioButton12"
+                    android:id="@+id/rbTClandestino"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/clandestino" />
@@ -145,7 +145,8 @@
             <Spinner
                 android:id="@+id/spTipoUso"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
 
             <LinearLayout
                 android:layout_width="match_parent"

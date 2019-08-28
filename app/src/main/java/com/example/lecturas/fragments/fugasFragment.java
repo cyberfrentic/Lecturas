@@ -1,24 +1,19 @@
 package com.example.lecturas.fragments;
 
-import android.Manifest;
+
 import android.app.Activity;
-import android.content.Context;
+import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.media.MediaScannerConnection;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.FileProvider;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,17 +22,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
-
+import com.example.lecturas.AdminSQLiteOpenHelper;
 import com.example.lecturas.R;
 import com.example.lecturas.clases.Utilidades;
-
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
-import javax.xml.transform.Result;
 
 public class fugasFragment extends Fragment {
 
@@ -48,6 +40,10 @@ public class fugasFragment extends Fragment {
     private Calendar fecha = Calendar.getInstance();
     private int mes = fecha.get(Calendar.MONTH) + 1;
     String path;
+    Uri photoURI;
+    String imageFileName;
+    FragmentManager fragmentManager;
+    preCedFragment precedula;
 
 
     @Override
@@ -72,20 +68,101 @@ public class fugasFragment extends Fragment {
         btTomarFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                locationStart();
                 tomarFotografia();
 
             }
         });
+        btGuradar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Utilidades.fuga = spinner.getSelectedItem().toString();
+                Utilidades.imageFileName = imageFileName;
+                guardarDatos();
+            }
+        });
         return vista;
     }
+
+    private void guardarDatos() {
+        Toast.makeText(getContext(), "latitud: "+Utilidades.Latitud+" Longitud: "+Utilidades.Longitud, Toast.LENGTH_LONG).show();
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(getContext(), "administracion", null, 1);
+        SQLiteDatabase BaseDeDatos = admin.getWritableDatabase();
+        //Creamos el registro a insertar como objeto ContentValues
+        ContentValues nuevoRegistro = new ContentValues();
+
+        if(Utilidades.contrato=="Sin Contrato") Utilidades.contrato = "0";
+
+        nuevoRegistro.put("contrato", Utilidades.contrato);
+        nuevoRegistro.put("gennombre", Utilidades.GenNombre);
+        nuevoRegistro.put("gendireccion", Utilidades.Gendireccion);
+        nuevoRegistro.put("gencruzamientos", Utilidades.GenCruzamientos);
+        nuevoRegistro.put("gencolonia", Utilidades.GenColonia);
+        nuevoRegistro.put("genmanzana", Utilidades.GenManzna);
+        nuevoRegistro.put("genlote", Utilidades.GenLote);
+        nuevoRegistro.put("genopciones", Utilidades.GenOpciones);
+        nuevoRegistro.put("genotros", Utilidades.GenOtros);
+        nuevoRegistro.put("tarttarifa", Utilidades.TarTTarifa);
+        nuevoRegistro.put("tarvfopciones", Utilidades.TarVFOpciones);
+        nuevoRegistro.put("tartuso", Utilidades.TarTUso);
+        nuevoRegistro.put("tomismedidor", Utilidades.TomIsMedidor);
+        nuevoRegistro.put("tommedidor", Utilidades.TomMedidor);
+        nuevoRegistro.put("tomisfunc", Utilidades.TomMIsFunc);
+        nuevoRegistro.put("tommisdesc", Utilidades.TomMIsDesc);
+        nuevoRegistro.put("tommisdesconectado", Utilidades.TomMIsDesconectado);
+        nuevoRegistro.put("tommisrob", Utilidades.TomMIsRob);
+        nuevoRegistro.put("tommisina", Utilidades.TomMIsIna);
+        nuevoRegistro.put("tommiscanc", Utilidades.TomMIsCanc);
+        nuevoRegistro.put("tomtisdirecta", Utilidades.TomTIsDirecta);
+        nuevoRegistro.put("tomtiscancelada", Utilidades.TomTIsCancelada);
+        nuevoRegistro.put("tomtisconolot", Utilidades.TomTIsConOLot);
+        nuevoRegistro.put("tomtisclandes", Utilidades.TomTIsClandes);
+        nuevoRegistro.put("tomdmiscance", Utilidades.TomDMIsCance);
+        nuevoRegistro.put("tomdtiscence", Utilidades.TomDTIsCance);
+        nuevoRegistro.put("tomdiscotrlot", Utilidades.TomDIsCOtrLot);
+        nuevoRegistro.put("tomdisclandes", Utilidades.TomDIsClandes);
+        nuevoRegistro.put("fuga", Utilidades.fuga);
+        nuevoRegistro.put("imagefilename", Utilidades.imageFileName);
+        if (Utilidades.Latitud==0.0 || Utilidades.Longitud==0.0){
+            Toast.makeText(getContext(),"No hay datos", Toast.LENGTH_LONG).show();
+        }
+        nuevoRegistro.put("latitud", Utilidades.Latitud);
+        nuevoRegistro.put("longitud", Utilidades.Longitud);
+        BaseDeDatos.insert("cedula", null, nuevoRegistro);
+        BaseDeDatos.close();
+
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        // Setting Title
+        progressDialog.setTitle("App Comercial");
+        // Setting Message
+        progressDialog.setMessage("Loading...");
+        // Progress Dialog Style Horizontal
+        progressDialog.setIndeterminate(true);
+        // Cannot Cancel Progress Dialog
+        progressDialog.setCancelable(false);
+        //Dismiss the dialog
+        progressDialog.show();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                precedula = new preCedFragment();
+                fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.contenedor, precedula).addToBackStack(null).commit();
+                //Dismiss the dialog
+                progressDialog.dismiss();
+            }
+        }, 5000);
+
+
+    }
+
 
     String currentPhotoPath;
 
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = Utilidades.contrato+"_Fuga_"+ timeStamp + "_";
+        imageFileName = Utilidades.contrato+"_Fuga_"+ timeStamp + "_";
         File storageDir = getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(imageFileName,".jpg", storageDir);
 
@@ -131,33 +208,4 @@ public class fugasFragment extends Fragment {
         }
     }
 
-    private void locationStart() {
-        LocationManager locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
-        LocationListener locationListener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                Utilidades.Latitud = location.getLatitude();
-                Utilidades.Longitud = location.getLongitude();
-            }
-
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-
-            }
-        };
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-    }
 }

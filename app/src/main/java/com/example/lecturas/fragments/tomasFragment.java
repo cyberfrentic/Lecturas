@@ -8,11 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 
 import com.example.lecturas.R;
+import com.example.lecturas.clases.Utilidades;
+
+import static com.example.lecturas.fragments.cedulaFragment.viewPager;
 
 public class tomasFragment extends Fragment {
 
@@ -21,10 +25,7 @@ public class tomasFragment extends Fragment {
     private EditText etMedidor;
     private Switch nMedidor, mFuncionando, mDescompuesto, mDesconectado, mrobado, mInaccesible, nCancelado;
     private Switch tDirecta, tCancelada, tCoL, tClandestina, dMCancelado, dTCancelada, dTCoL, dTClandestina;
-
-    public tomasFragment() {
-        // Required empty public constructor
-    }
+    private Button btTomanext;
 
 
     @Override
@@ -49,6 +50,10 @@ public class tomasFragment extends Fragment {
         dTCancelada = (Switch) vista.findViewById(R.id.dTCancelada);
         dTCoL = (Switch) vista.findViewById(R.id.dTCoL);
         dTClandestina = (Switch) vista.findViewById(R.id.dTClandestina);
+        btTomanext = (Button) vista.findViewById(R.id.btTomanext);
+        if (Utilidades.contrato!="Sin contrato"){
+            etMedidor.setText(Utilidades.TomMedidor);
+        }
 
         //#################### Adapter del spiner##################
         spinner = (Spinner) vista.findViewById(R.id.tomasspinner);
@@ -76,6 +81,72 @@ public class tomasFragment extends Fragment {
                 }else{
                     spinner.setVisibility(View.GONE);
                 }
+            }
+        });
+
+        btTomanext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Utilidades.contrato!="Sin Contrato") {
+                    if (nMedidor.isChecked()) {
+                        Utilidades.TomIsMedidor = "Si";
+                        Utilidades.TomMedidor = etMedidor.getText().toString();
+                    } else {
+                        Utilidades.TomIsMedidor = "No";
+                        Utilidades.TomMedidor = "Sin Medidor";
+                    }
+                }else{
+                    if (nMedidor.isChecked()) {
+                        Utilidades.TomIsMedidor = "Si";
+                        Utilidades.TomMedidor = etMedidor.getText().toString();
+                    } else {
+                        Utilidades.TomIsMedidor = "No";
+                        Utilidades.TomMedidor = Utilidades.TomMedidor;
+                    }
+                }
+                if (mFuncionando.isChecked()){
+                    Utilidades.TomMIsFunc="Si";
+                }
+                if (mDescompuesto.isChecked()){
+                    Utilidades.TomMIsDesc="Si";
+                }
+                if (mDesconectado.isChecked()){
+                    Utilidades.TomMIsDesconectado="Si";
+                }
+                if (mrobado.isChecked()){
+                    Utilidades.TomMIsRob="Si";
+                }
+                if (mInaccesible.isChecked()){
+                    Utilidades.TomMIsIna= spinner.getSelectedItem().toString();
+                }
+                if(nCancelado.isChecked()){
+                    Utilidades.TomMIsCanc="Si";
+                }
+                if(tDirecta.isChecked()){
+                    Utilidades.TomTIsDirecta="Si";
+                }
+                if(nCancelado.isChecked()){
+                    Utilidades.TomTIsCancelada="Si";
+                }
+                if(tCoL.isChecked()){
+                    Utilidades.TomTIsConOLot="Si";
+                }
+                if(tClandestina.isChecked()){
+                    Utilidades.TomTIsClandes="Si";
+                }
+                if (dMCancelado.isChecked()){
+                    Utilidades.TomDMIsCance="Si";
+                }
+                if(dTCancelada.isChecked()){
+                    Utilidades.TomDTIsCance="Si";
+                }
+                if(dTCoL.isChecked()){
+                    Utilidades.TomDIsCOtrLot="Si";
+                }
+                if(dTClandestina.isChecked()){
+                    Utilidades.TomDIsClandes="Si";
+                }
+                viewPager.setCurrentItem(3);
             }
         });
         return vista;

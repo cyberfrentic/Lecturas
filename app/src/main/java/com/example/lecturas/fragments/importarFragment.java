@@ -1,7 +1,6 @@
 package com.example.lecturas.fragments;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.database.DatabaseUtils;
@@ -74,75 +73,78 @@ public class importarFragment extends Fragment {
             public void onClick(View view) {
                 String ruta = (String) carpetaActual.getText().toString();
                 Toast.makeText(getContext(), ruta, Toast.LENGTH_LONG).show();
-                String linea, sCadena;
-                List<String> listado = new ArrayList<String>();
+                String linea;
+//                List<String> listado = new ArrayList<String>();
                 ContentValues contenedor = new ContentValues();
                 AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(getContext(), "administracion", null, 1);
                 SQLiteDatabase BaseDeDatos = admin.getWritableDatabase();
-                int numRows1 = (int) DatabaseUtils.queryNumEntries(BaseDeDatos,"padron");
-                if (numRows1 == 0){
-                    try {
-                        File textFile = new File(Environment.getExternalStorageDirectory(), (String) carpetaActual.getText());
-                        FileInputStream fis = new FileInputStream(textFile);
-                        if (fis != null) {
-                            int contador1 = 0;
-                            InputStreamReader isr = new InputStreamReader(fis);
-                            BufferedReader lector = new BufferedReader(isr);
-                            while ((linea = lector.readLine()) != null) {
-                                contador1+=1;
-                                String locali = linea.substring(1, 24).trim();
-                                String contra = linea.substring(25, 31).trim();
-                                String nomb = linea.substring(32, 70).trim();
-                                String direc = linea.substring(71, 111).trim();
-                                String medidor = linea.substring(112, 120).trim();
-                                String tarif = linea.substring(121, 124).trim();
-                                String anterior = linea.substring(138, 147).trim();
-                                contenedor.put("id", contador1);
-                                contenedor.put("numloc", locali);
-                                contenedor.put("contrato", contra);
-                                contenedor.put("nombre", nomb);
-                                contenedor.put("direccion", direc);
-                                contenedor.put("nummed", medidor);
-                                contenedor.put("tarifa", tarif);
-                                contenedor.put("lecant", anterior);
-                                contenedor.put("modif","0");
-                                BaseDeDatos.insert("padron", null, contenedor);
-                            }
-                            int numRows = (int) DatabaseUtils.queryNumEntries(BaseDeDatos,"padron");
-                            BaseDeDatos.close();
-                            String contador = Integer.toString(numRows);
-                            final AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
-                            // Setting Dialog Title
-                            alertDialog.setTitle("Sistema Lecturas");
-
-                            // Setting Dialog Message
-                            alertDialog.setMessage("Los "+ contador +" registros se han cargado con exito");
-
-                            // Setting Icon to Dialog
-                            alertDialog.setIcon(R.drawable.alerta);
-
-                            // Setting OK Button
-                            alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    // Write your code here to execute after dialog closed
-//                                Toast.makeText(getContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
-                                    alertDialog.dismiss();
+                if (ruta.contains("rutas")) {
+                    int numRows1 = (int) DatabaseUtils.queryNumEntries(BaseDeDatos, "padron");
+                    if (numRows1 == 0) {
+                        try {
+                            File textFile = new File(Environment.getExternalStorageDirectory(), (String) carpetaActual.getText());
+                            FileInputStream fis = new FileInputStream(textFile);
+                            if (fis != null) {
+                                int contador1 = 0;
+                                InputStreamReader isr = new InputStreamReader(fis);
+                                BufferedReader lector = new BufferedReader(isr);
+                                while ((linea = lector.readLine()) != null) {
+                                    contador1 += 1;
+                                    String locali = linea.substring(1, 24).trim();
+                                    String contra = linea.substring(25, 31).trim();
+                                    String nomb = linea.substring(32, 70).trim();
+                                    String direc = linea.substring(71, 111).trim();
+                                    String medidor = linea.substring(112, 120).trim();
+                                    String tarif = linea.substring(121, 124).trim();
+                                    String anterior = linea.substring(138, 147).trim();
+                                    contenedor.put("id", contador1);
+                                    contenedor.put("numloc", locali);
+                                    contenedor.put("contrato", contra);
+                                    contenedor.put("nombre", nomb);
+                                    contenedor.put("direccion", direc);
+                                    contenedor.put("nummed", medidor);
+                                    contenedor.put("tarifa", tarif);
+                                    contenedor.put("lecant", anterior);
+                                    contenedor.put("modif", "0");
+                                    BaseDeDatos.insert("padron", null, contenedor);
                                 }
-                            });
+                                int numRows = (int) DatabaseUtils.queryNumEntries(BaseDeDatos, "padron");
+                                BaseDeDatos.close();
+                                String contador = Integer.toString(numRows);
+                                final AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
+                                // Setting Dialog Title
+                                alertDialog.setTitle("Sistema Lecturas");
 
-                            // Showing Alert Message
-                            alertDialog.show();
+                                // Setting Dialog Message
+                                alertDialog.setMessage("Los " + contador + " registros se han cargado con exito");
+
+                                // Setting Icon to Dialog
+                                alertDialog.setIcon(R.drawable.alerta);
+
+                                // Setting OK Button
+                                alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // Write your code here to execute after dialog closed
+//                                Toast.makeText(getContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
+                                        alertDialog.dismiss();
+                                    }
+                                });
+
+                                // Showing Alert Message
+                                alertDialog.show();
 //                        Toast.makeText(getContext(), contador +" Registros agregados con exito", Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(getContext(), "El archivo esta Vacio", Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(getContext(), "El archivo esta Vacio", Toast.LENGTH_LONG).show();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    } else {
+                        Toast.makeText(getContext(), "la tabla padron ya cueta con registros debe limpiarlo antes", Toast.LENGTH_LONG).show();
                     }
                 }else{
-                    Toast.makeText(getContext(), "la tabla padron ya cueta con registros debe limpiarlo antes", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),ruta+" padron archivo", Toast.LENGTH_LONG).show();
                 }
-
             }
 
         });
