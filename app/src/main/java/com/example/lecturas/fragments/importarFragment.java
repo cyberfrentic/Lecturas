@@ -1,12 +1,14 @@
 package com.example.lecturas.fragments;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -143,6 +145,55 @@ public class importarFragment extends Fragment {
                         Toast.makeText(getContext(), "la tabla padron ya cueta con registros debe limpiarlo antes", Toast.LENGTH_LONG).show();
                     }
                 }else{
+                    // aqui subiremos el otro archivo!!!
+                    final ProgressDialog progressDialog = new ProgressDialog(getContext());
+                    // Setting Title
+                    progressDialog.setTitle("App Comercial");
+                    // Setting Message
+                    progressDialog.setMessage("Loading...");
+                    // Progress Dialog Style Horizontal
+                    progressDialog.setIndeterminate(true);
+                    // Cannot Cancel Progress Dialog
+                    progressDialog.setCancelable(false);
+                    Handler handler = new Handler();
+                    int numRows1 = (int) DatabaseUtils.queryNumEntries(BaseDeDatos, "padronTotal");
+                    if (numRows1 == 0) {
+                        try {
+                            File textFile = new File(Environment.getExternalStorageDirectory(), (String) carpetaActual.getText());
+                            FileInputStream fis = new FileInputStream(textFile);
+                            if (fis != null) {
+                                int contador1 = 0;
+                                InputStreamReader isr = new InputStreamReader(fis);
+                                BufferedReader lector = new BufferedReader(isr);
+                                progressDialog.show();
+                                while ((linea = lector.readLine()) != null) {
+                                    contador1 += 1;
+                                    String [] parts = linea.split(",");
+                                    contenedor.put("cuenta", parts[0]);
+                                    contenedor.put("sb", parts[1]);
+                                    contenedor.put("sector", parts[2]);
+                                    contenedor.put("manzana", parts[3]);
+                                    contenedor.put("lote", parts[4]);
+                                    contenedor.put("nombre", parts[5]);
+                                    contenedor.put("direccion", parts[6]);
+                                    contenedor.put("colonia", parts[7]);
+                                     contenedor.put("tarifa", parts[8]);
+                                    BaseDeDatos.insert("padronTotal", null, contenedor);
+                                }
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        //Dismiss the dialog
+                                        progressDialog.dismiss();
+                                    }
+                                }, 5000);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }else {
+                        Toast.makeText(getContext(), "la tabla padron ya cueta con registros debe limpiarlo antes", Toast.LENGTH_LONG).show();
+                    }
                     Toast.makeText(getContext(),ruta+" padron archivo", Toast.LENGTH_LONG).show();
                 }
             }

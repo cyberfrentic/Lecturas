@@ -1,7 +1,6 @@
 package com.example.lecturas.fragments;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,16 +9,12 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.lecturas.AdminSQLiteOpenHelper;
 import com.example.lecturas.ListaVo;
-import com.example.lecturas.PadronVo;
 import com.example.lecturas.R;
 import com.example.lecturas.adapterListaLec;
 

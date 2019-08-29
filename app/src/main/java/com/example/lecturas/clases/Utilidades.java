@@ -1,14 +1,21 @@
 package com.example.lecturas.clases;
 
 import android.net.Uri;
-import android.text.Editable;
 
 public class Utilidades {
     public static int rotacion = 0;
     public static String contrato="";
     public static Uri uris;
+    public static String Cual;
+    public static boolean tomadaM=false;
+    public static boolean tomadaP=false;
     public static double Latitud;
     public static double Longitud;
+
+    //varios para determinar la colonia
+    public static String sector;
+    public static String sb;
+    public static String colonia;
 
     //Fragment Generales
     public static String GenNombre="";

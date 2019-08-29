@@ -44,7 +44,17 @@ public class tarifasFragment extends Fragment {
         if (Utilidades.contrato == "Sin Contrato"){
             tTarifa.setText("Sin Tarifa");
         }else{
-            tTarifa.setText(Utilidades.TarTTarifa);
+            if (Utilidades.TarTTarifa.equals("1") || Utilidades.TarTTarifa.equals("2") || Utilidades.TarTTarifa.equals("3")) {
+                tTarifa.setText("Domestico");
+            }else if(Utilidades.TarTTarifa.equals("4")){
+                tTarifa.setText("Hotelero");
+            }else if(Utilidades.TarTTarifa.equals("5")) {
+                tTarifa.setText("Comercial");
+            }else if(Utilidades.TarTTarifa.equals("6")) {
+                tTarifa.setText("Industrial");
+            }else if(Utilidades.TarTTarifa.equals("7")) {
+                tTarifa.setText("Servicios Publicos");
+            }
         }
 
         //#################### Adapter del spiner COLONIA##################
