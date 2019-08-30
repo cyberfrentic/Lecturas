@@ -15,7 +15,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper{
         //Lista de medidores
         BaseDeDatos.execSQL("CREATE TABLE padron(id int primary key unique, numloc text, contrato text, nombre text, direccion text, nummed text, tarifa text, lecant text, modif text)");
         //almaceno las lecturas tomadas
-        BaseDeDatos.execSQL("CREATE TABLE lectura(contrato text primary key unique, lectura text, anomalia text)");
+        BaseDeDatos.execSQL("CREATE TABLE lectura(contrato text primary key unique, lectura text, anomalia text, longitud text, latitud text, imgMedidor text, imgpred text)");
         //tabla del padron para las cedulas
         BaseDeDatos.execSQL("CREATE TABLE padronTotal (cuenta text primary key unique, sb text, sector text, manzana text, lote text, nombre text, direccion text, colonia text, tarifa text)");
         // cedulas capturadas

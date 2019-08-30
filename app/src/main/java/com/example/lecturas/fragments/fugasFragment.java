@@ -145,6 +145,7 @@ public class fugasFragment extends Fragment {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                resetVarGlob();
                 precedula = new preCedFragment();
                 fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.contenedor, precedula).addToBackStack(null).commit();
@@ -154,6 +155,53 @@ public class fugasFragment extends Fragment {
         }, 5000);
 
 
+    }
+
+    private void resetVarGlob() {
+        Utilidades. Latitud=0.0;
+        Utilidades. Longitud=0.0;
+
+        //varios para determinar la colonia
+        Utilidades. sector="";
+        Utilidades. sb="";
+        Utilidades. colonia="";
+
+        //Fragment Generales
+        Utilidades. GenNombre="";
+        Utilidades. Gendireccion="";
+        Utilidades. GenCruzamientos="";
+        Utilidades. GenColonia="";
+        Utilidades. GenManzna="";
+        Utilidades. GenLote="";
+        Utilidades. GenOpciones="";
+        Utilidades. GenOtros="";
+
+        // Fragment Tarifas
+        Utilidades. TarTTarifa=""; // tarifa de la tabla padron
+        Utilidades. TarVFOpciones="";
+        Utilidades. TarTUso="";
+
+        //Fragment Tomas
+        Utilidades. TomIsMedidor="";
+        Utilidades. TomMedidor=""; //Numero de medidor de la tablaPadmed
+        Utilidades. TomMIsFunc="";
+        Utilidades. TomMIsDesc="";
+        Utilidades. TomMIsDesconectado = "";
+        Utilidades. TomMIsRob="";
+        Utilidades. TomMIsIna="";
+        Utilidades. TomMIsCanc="";
+        Utilidades. TomTIsDirecta ="";
+        Utilidades. TomTIsCancelada="";
+        Utilidades. TomTIsConOLot="";
+        Utilidades. TomTIsClandes="";
+        Utilidades. TomDMIsCance="";
+        Utilidades. TomDTIsCance="";
+        Utilidades. TomDIsCOtrLot="";
+        Utilidades. TomDIsClandes="";
+
+        //Fragment Fugas
+        Utilidades. fuga="";
+        Utilidades. imageFileName="";
     }
 
 

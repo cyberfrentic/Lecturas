@@ -31,6 +31,10 @@ public class LoginActivity extends AppCompatActivity {
             registro.put("pass", "260182");
             registro.put("nombre", "Hugo Paulino Canul Echazarreta");
             BaseDeDatos.insert("usuarios", null, registro);
+            registro.put("user", "user1");
+            registro.put("pass", "123456");
+            registro.put("nombre", "Usuario Asignado a la Terminal");
+            BaseDeDatos.insert("usuarios", null, registro);
             BaseDeDatos.close();
         }
 

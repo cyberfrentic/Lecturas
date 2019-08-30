@@ -103,9 +103,7 @@ public class capturaLecturaFragment extends Fragment {
                         direccion.setText("");
                         lectura.setText("");
                         spinner.setSelection(0);
-//                        lecturaatras = new lecturafragment();
-//                        fragmentManager = getFragmentManager();
-//                        fragmentManager.beginTransaction().replace(R.id.contenedor, lecturaatras).addToBackStack(null).commit();
+                        Toast.makeText(getContext(),Utilidades.Latitud+" "+Utilidades.Longitud, Toast.LENGTH_LONG).show();
 
                     }else{
                         final AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
@@ -136,15 +134,21 @@ public class capturaLecturaFragment extends Fragment {
         contenedor.put("contrato", contrato);
         contenedor.put("lectura", lectura);
         contenedor.put("anomalia", anomalia);
+        contenedor.put("longitud", Utilidades.Longitud);
+        contenedor.put("latitud", Utilidades.Latitud);
+        contenedor.put("imgMedidor", Utilidades.nam);
+        contenedor.put("imgpred", Utilidades.nap);
         contenedor2.put("modif", "1");
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(getContext(), "administracion", null, 1);
         SQLiteDatabase BaseDeDatos = admin.getWritableDatabase();
         int modificados = BaseDeDatos.update("padron", contenedor2,"contrato=?", new String[] {contrato});
-        Toast.makeText(getContext(),"regsitros modificados: "+modificados,Toast.LENGTH_SHORT).show();
+        final long lectura1 = BaseDeDatos.insert("lectura", null, contenedor);
+
+        Toast.makeText(getContext(),lectura1+"regsitros modificados: "+modificados,Toast.LENGTH_SHORT).show();
         if (modificados>1){
             Toast.makeText(getContext(),"Exise mas de un registro con el mismo numero de contrato",Toast.LENGTH_SHORT).show();
         }
-        BaseDeDatos.insert("lectura", null, contenedor);
+
     }
 
 //################################################################################################
@@ -197,10 +201,12 @@ String currentPhotoPath;
                 if(Utilidades.Cual.equals("Medidor")){
                     imgMedidor.setImageURI(Utilidades.uris);
                     Utilidades.tomadaM=true;
+                    Utilidades.nam = Utilidades.uris.toString();
                     Toast.makeText(getContext(),"foto tomada", Toast.LENGTH_LONG).show();
                 }else{
                     imgPredio.setImageURI(Utilidades.uris);
                     Utilidades.tomadaP=true;
+                    Utilidades.nap = Utilidades.uris.toString();
                     Toast.makeText(getContext(),"foto tomada", Toast.LENGTH_LONG).show();
                 }
 

@@ -8,6 +8,8 @@ public class Utilidades {
     public static Uri uris;
     public static String Cual;
     public static boolean tomadaM=false;
+    public static String nam;
+    public static String nap;
     public static boolean tomadaP=false;
     public static double Latitud;
     public static double Longitud;

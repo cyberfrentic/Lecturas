@@ -1,10 +1,17 @@
 package com.example.lecturas.fragments;
 
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -22,6 +29,7 @@ import com.example.lecturas.AdminSQLiteOpenHelper;
 import com.example.lecturas.PadronVo;
 import com.example.lecturas.R;
 import com.example.lecturas.adaptadorpadron;
+import com.example.lecturas.clases.Utilidades;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -87,7 +95,7 @@ public class lecturafragment extends Fragment{
     }
 
     private void goToCapturaLectura(String c, String m, String n, String d) {
-
+        locationStart();
         lectura = new capturaLecturaFragment();
         Bundle bundle = new Bundle();
         bundle.putString("contrato", c);
@@ -98,6 +106,35 @@ public class lecturafragment extends Fragment{
         lectura.setArguments(bundle);
         fragmentManager.beginTransaction().replace(R.id.contenedor, lectura).addToBackStack(null).commit();
 
+    }
+    public void locationStart() {
+        LocationManager locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
+        LocationListener locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                Utilidades.Latitud = location.getLatitude();
+                Utilidades.Longitud = location.getLongitude();
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+
+            }
+        };
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
     }
 }
 
