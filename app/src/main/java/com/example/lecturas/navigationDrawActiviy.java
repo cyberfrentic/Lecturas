@@ -11,11 +11,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
-import android.text.format.Time;
 import android.util.Log;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
@@ -26,7 +24,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -35,8 +32,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.lecturas.fragments.SendServerFragment;
-import com.example.lecturas.fragments.cedulaFragment;
 import com.example.lecturas.fragments.homeFragment;
 import com.example.lecturas.fragments.importarFragment;
 import com.example.lecturas.fragments.lecturafragment;
@@ -53,8 +48,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.TimeZone;
 
 public class navigationDrawActiviy extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, Response.Listener<JSONObject>, Response.ErrorListener {
@@ -286,13 +279,16 @@ public class navigationDrawActiviy extends AppCompatActivity
             // Showing Alert Message
             alertDialog.show();
 
+            //#################################################################
+            //#### Comunicación con la Api Rest Full de python y por POST #####
+            //#################################################################
             request = Volley.newRequestQueue(this);
             try {
                 cargarWebService();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
+            //##################################################################
 
         } else if (id == R.id.nav_send) {
             Intent salida = new Intent( Intent.ACTION_MAIN); //Llamando a la activity principal
@@ -305,6 +301,9 @@ public class navigationDrawActiviy extends AppCompatActivity
         return true;
     }
 
+    //#################################################################
+    //#### Comunicación con la Api Rest Full de python y por POST #####
+    //#################################################################
     private void cargarWebService() throws JSONException {
         progreso = new ProgressDialog(this);
         progreso.setTitle("App Comercial");
@@ -330,5 +329,6 @@ public class navigationDrawActiviy extends AppCompatActivity
         Toast.makeText(this,"Se logro la conexion" +response.toString(), Toast.LENGTH_LONG).show();
         progreso.dismiss();
     }
+    //#############################################################################
 
 }
