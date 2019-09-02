@@ -121,12 +121,19 @@ public class fugasFragment extends Fragment {
         nuevoRegistro.put("tomdiscotrlot", Utilidades.TomDIsCOtrLot);
         nuevoRegistro.put("tomdisclandes", Utilidades.TomDIsClandes);
         nuevoRegistro.put("fuga", Utilidades.fuga);
-        nuevoRegistro.put("imagefilename", Utilidades.imageFileName);
+        if (Utilidades.imageFileName==null){
+            nuevoRegistro.put("imagefilename", "sin foto");
+        }else{
+            nuevoRegistro.put("imagefilename", Utilidades.imageFileName);
+        }
+
         if (Utilidades.Latitud==0.0 || Utilidades.Longitud==0.0){
             Toast.makeText(getContext(),"No hay datos", Toast.LENGTH_LONG).show();
         }
         nuevoRegistro.put("latitud", Utilidades.Latitud);
         nuevoRegistro.put("longitud", Utilidades.Longitud);
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        nuevoRegistro.put("fecha", timeStamp);
         BaseDeDatos.insert("cedula", null, nuevoRegistro);
         BaseDeDatos.close();
 

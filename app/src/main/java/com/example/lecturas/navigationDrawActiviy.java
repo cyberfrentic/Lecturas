@@ -143,7 +143,7 @@ public class navigationDrawActiviy extends AppCompatActivity
             navigationView.getMenu().findItem(R.id.exportar).setVisible(false);
         }
 
-        if (mes == 1 || mes==5 || mes== 8) {
+        if (mes == 1 || mes==5 || mes== 9) {
             navigationView.getMenu().findItem(R.id.nav_share).setVisible(true);
         }else{
             navigationView.getMenu().findItem(R.id.nav_share).setVisible(false);
@@ -310,11 +310,54 @@ public class navigationDrawActiviy extends AppCompatActivity
         progreso.setMessage("Conectando...");
         progreso.show();
         JSONObject postparams = new JSONObject();
-        postparams.accumulate("city", "london");
-        postparams.accumulate("timestamp", "1500134255");
-        String url="http://192.168.15.45:7500/comercial/api/rest";
-        jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, postparams,  this,this);
-        request.add(jsonObjectRequest);
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "administracion", null, 1);
+        SQLiteDatabase BaseDeDatos = admin.getWritableDatabase();
+        String [] campos = new String[] {"contrato", "gennombre", "gendireccion", "gencruzamientos", "gencolonia", "genmanzana", "genlote", "genopciones", "genotros", "tarttarifa", "tarvfopciones", "tartuso", "tomismedidor", "tommedidor", "tomisfunc", "tommisdesc" , "tommisdesconectado", "tommisrob", "tommisina", "tommiscanc", "tomtisdirecta", "tomtiscancelada", "tomtisconolot", "tomtisclandes", "tomdmiscance", "tomdtiscence", "tomdiscotrlot", "tomdisclandes", "fuga", "imagefilename", "latitud", "longitud", "fecha"};
+        Cursor fila = BaseDeDatos.query("cedula",campos,null, null, null, null, null);
+        if (fila.moveToFirst()){
+            do{
+                postparams.put("contrato", fila.getString(0));
+                postparams.put("gennombre", fila.getString(1));
+                postparams.put("gendireccion", fila.getString(2));
+                postparams.put("gencruzamientos", fila.getString(3));
+                postparams.put("gencolonia", fila.getString(4));
+                postparams.put("genmanzana", fila.getString(5));
+                postparams.put("genlote", fila.getString(6));
+                postparams.put("genopciones", fila.getString(7));
+                postparams.put("genotros", fila.getString(8));
+                postparams.put("tarttarifa", fila.getString(9));
+                postparams.put("tarvfopciones", fila.getString(10));
+                postparams.put("tartuso", fila.getString(11));
+                postparams.put("tomismedidor", fila.getString(12));
+                postparams.put("tommedidor", fila.getString(13));
+                postparams.put("tomisfunc", fila.getString(14));
+                postparams.put("tomisdesc", fila.getString(15));
+                postparams.put("tommisdesconectado", fila.getString(16));
+                postparams.put("tommisrob", fila.getString(17));
+                postparams.put("tommisina", fila.getString(18));
+                postparams.put("tommiscanc", fila.getString(19));
+                postparams.put("tomtisdirecta", fila.getString(20));
+                postparams.put("tomtiscancelada", fila.getString(21));
+                postparams.put("tomtisconolot", fila.getString(22));
+                postparams.put("tomtisclandes", fila.getString(23));
+                postparams.put("tomdmiscance", fila.getString(24));
+                postparams.put("tomdtiscence", fila.getString(25));
+                postparams.put("tomdiscontrlot", fila.getString(26));
+                postparams.put("tomdisclandes", fila.getString(27));
+                postparams.put("fuga", fila.getString(28));
+                postparams.put("imagefilename", fila.getString(29));
+                postparams.put("latitud", fila.getString(30));
+                postparams.put("longitud", fila.getString(31));
+                postparams.put("fecha", fila.getString(32));
+                String url="http://192.168.15.45:7550/comercial/api/rest";
+                jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, postparams,  this,this);
+                request.add(jsonObjectRequest);
+            }while (fila.moveToNext());
+        }else{
+            Toast.makeText(this, "No existen datos", Toast.LENGTH_SHORT).show();
+        }
+
+//        BaseDeDatos.delete("cedula", null, null);
     }
 
     @Override
@@ -326,7 +369,7 @@ public class navigationDrawActiviy extends AppCompatActivity
 
     @Override
     public void onResponse(JSONObject response) {
-        Toast.makeText(this,"Se logro la conexion" +response.toString(), Toast.LENGTH_LONG).show();
+        Toast.makeText(this,response.toString(), Toast.LENGTH_LONG).show();
         progreso.dismiss();
     }
     //#############################################################################
