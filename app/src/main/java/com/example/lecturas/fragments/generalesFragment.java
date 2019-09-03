@@ -87,24 +87,6 @@ public class generalesFragment extends Fragment {
             etDireccion.setText(Utilidades.Gendireccion);
             etManzana.setText(Utilidades.GenManzna);
             etLote.setText(Utilidades.GenLote);
-            Toast.makeText(getContext(), Utilidades.colonia, Toast.LENGTH_SHORT).show();
-            if(Utilidades.sector =="1" && Utilidades.sb=="1") {
-
-                if (Utilidades.colonia=="1") {
-                    etColonia.setEnabled(true);
-                    etColonia.setClickable(true);
-
-                    spinner.setSelection(1);
-                }else if(Utilidades.colonia=="3"){
-                    etColonia.setEnabled(true);
-                    etColonia.setClickable(true);
-                    int spinnerPosition = adapter.getPosition("Fco. May");
-                    Toast.makeText(getContext(), spinnerPosition +" ", Toast.LENGTH_SHORT).show();
-                    etColonia.setSelection(spinnerPosition);
-
-                    spinner.setSelection(3);
-                }
-            }
         }
 
         checkNombre.setOnClickListener(new View.OnClickListener() {

@@ -76,7 +76,7 @@ public class fugasFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Utilidades.fuga = spinner.getSelectedItem().toString();
-                Utilidades.imageFileName = imageFileName;
+                Utilidades.imageFileName = Utilidades.uris.toString();
                 guardarDatos();
             }
         });
@@ -84,13 +84,16 @@ public class fugasFragment extends Fragment {
     }
 
     private void guardarDatos() {
-        Toast.makeText(getContext(), "latitud: "+Utilidades.Latitud+" Longitud: "+Utilidades.Longitud, Toast.LENGTH_LONG).show();
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(getContext(), "administracion", null, 1);
         SQLiteDatabase BaseDeDatos = admin.getWritableDatabase();
         //Creamos el registro a insertar como objeto ContentValues
         ContentValues nuevoRegistro = new ContentValues();
 
-        if(Utilidades.contrato=="Sin Contrato") Utilidades.contrato = "0";
+        if(Utilidades.contrato=="Sin Contrato"){
+            Utilidades.contrato = "0";
+        }else{
+
+        }
 
         nuevoRegistro.put("contrato", Utilidades.contrato);
         nuevoRegistro.put("gennombre", Utilidades.GenNombre);
@@ -134,6 +137,7 @@ public class fugasFragment extends Fragment {
         nuevoRegistro.put("longitud", Utilidades.Longitud);
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         nuevoRegistro.put("fecha", timeStamp);
+        nuevoRegistro.put("sector", Utilidades.sector);
         BaseDeDatos.insert("cedula", null, nuevoRegistro);
         BaseDeDatos.close();
 

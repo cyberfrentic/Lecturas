@@ -312,7 +312,7 @@ public class navigationDrawActiviy extends AppCompatActivity
         JSONObject postparams = new JSONObject();
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "administracion", null, 1);
         SQLiteDatabase BaseDeDatos = admin.getWritableDatabase();
-        String [] campos = new String[] {"contrato", "gennombre", "gendireccion", "gencruzamientos", "gencolonia", "genmanzana", "genlote", "genopciones", "genotros", "tarttarifa", "tarvfopciones", "tartuso", "tomismedidor", "tommedidor", "tomisfunc", "tommisdesc" , "tommisdesconectado", "tommisrob", "tommisina", "tommiscanc", "tomtisdirecta", "tomtiscancelada", "tomtisconolot", "tomtisclandes", "tomdmiscance", "tomdtiscence", "tomdiscotrlot", "tomdisclandes", "fuga", "imagefilename", "latitud", "longitud", "fecha"};
+        String [] campos = new String[] {"contrato", "gennombre", "gendireccion", "gencruzamientos", "gencolonia", "genmanzana", "genlote", "genopciones", "genotros", "tarttarifa", "tarvfopciones", "tartuso", "tomismedidor", "tommedidor", "tomisfunc", "tommisdesc" , "tommisdesconectado", "tommisrob", "tommisina", "tommiscanc", "tomtisdirecta", "tomtiscancelada", "tomtisconolot", "tomtisclandes", "tomdmiscance", "tomdtiscence", "tomdiscotrlot", "tomdisclandes", "fuga", "imagefilename", "latitud", "longitud", "fecha", "sector"};
         Cursor fila = BaseDeDatos.query("cedula",campos,null, null, null, null, null);
         if (fila.moveToFirst()){
             do{
@@ -349,6 +349,7 @@ public class navigationDrawActiviy extends AppCompatActivity
                 postparams.put("latitud", fila.getString(30));
                 postparams.put("longitud", fila.getString(31));
                 postparams.put("fecha", fila.getString(32));
+                postparams.put("sector", fila.getString(33));
                 String url="http://192.168.15.45:7550/comercial/api/rest";
                 jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, postparams,  this,this);
                 request.add(jsonObjectRequest);
@@ -363,7 +364,7 @@ public class navigationDrawActiviy extends AppCompatActivity
     @Override
     public void onErrorResponse(VolleyError error) {
         progreso.dismiss();
-        Toast.makeText(this, "no se pudo conectar"+error.toString(), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "no se pudo conectar: "+error.toString(), Toast.LENGTH_LONG).show();
         Log.i("ERROR", error.toString());
     }
 

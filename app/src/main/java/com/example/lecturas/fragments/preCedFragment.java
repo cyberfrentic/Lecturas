@@ -93,7 +93,7 @@ public class preCedFragment extends Fragment {
                         String cuenta = Utilidades.contrato;
                         String [] campos = new String[]{"cuenta", "sb", "sector", "manzana", "lote", "nombre", "direccion", "colonia", "tarifa"};
                         String [] args = new String[]{cuenta};
-//                        Cursor fila = BaseDeDatos.rawQuery("select user from usuarios where user =?", new String[] {usua});
+
                         Cursor fila = BaseDeDatos.query("padronTotal", campos, "cuenta=?", args, null,null,null);
                         if (fila.moveToFirst()){
                             Utilidades.contrato = fila.getString(0);
@@ -105,19 +105,21 @@ public class preCedFragment extends Fragment {
                             Utilidades.Gendireccion = fila.getString(6);
                             Utilidades.colonia = fila.getString(7);
                             Utilidades.TarTTarifa = fila.getString(8);
-                        }
-
-                        String [] campos2 = new String[]{"nummed"};
-                        Cursor fila2 = BaseDeDatos.query("padron", campos2, "contrato=?", args, null,null,null);
-                        if (fila2.moveToFirst()){
-                            Utilidades.TomMedidor=fila2.getString(0);
+                            Toast.makeText(getContext(), Utilidades.GenNombre, Toast.LENGTH_SHORT).show();
+                            String [] campos2 = new String[]{"nummed"};
+                            Cursor fila2 = BaseDeDatos.query("padron", campos2, "contrato=?", args, null,null,null);
+                            if (fila2.moveToFirst()){
+                                Utilidades.TomMedidor=fila2.getString(0);
+                            }else{
+                                Utilidades.TomMedidor="0";
+                            }
+                            BaseDeDatos.close();
+                            cedula = new cedulaFragment();
+                            fragmentManager = getFragmentManager();
+                            fragmentManager.beginTransaction().replace(R.id.contenedor, cedula).addToBackStack(null).commit();
                         }else{
-                            Utilidades.TomMedidor="0";
+                            Toast.makeText(getContext(), "El Contrato No existe", Toast.LENGTH_SHORT).show();
                         }
-                        BaseDeDatos.close();
-                        cedula = new cedulaFragment();
-                        fragmentManager = getFragmentManager();
-                        fragmentManager.beginTransaction().replace(R.id.contenedor, cedula).addToBackStack(null).commit();
                     }
                 }else{
                     Utilidades.contrato = "Sin Contrato";

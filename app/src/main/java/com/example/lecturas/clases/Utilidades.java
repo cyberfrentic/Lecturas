@@ -15,9 +15,9 @@ public class Utilidades {
     public static double Longitud;
 
     //varios para determinar la colonia
-    public static String sector;
-    public static String sb;
-    public static String colonia;
+    public static String sector="";
+    public static String sb="";
+    public static String colonia="";
 
     //Fragment Generales
     public static String GenNombre="";
