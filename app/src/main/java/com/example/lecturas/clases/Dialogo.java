@@ -28,6 +28,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
+
 
 public class Dialogo extends AppCompatDialogFragment implements Response.Listener<JSONObject>, Response.ErrorListener {
     private TextView sector, ruta;
@@ -36,6 +38,8 @@ public class Dialogo extends AppCompatDialogFragment implements Response.Listene
     private String sectorText, rutaText;
     RequestQueue request;
     JsonObjectRequest jsonObjectRequest;
+    private Calendar fecha = Calendar.getInstance();
+    private int mes = fecha.get(Calendar.MONTH) + 1;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
