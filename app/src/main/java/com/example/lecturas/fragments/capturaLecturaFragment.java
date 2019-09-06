@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
@@ -24,11 +23,9 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.lecturas.AdminSQLiteOpenHelper;
 import com.example.lecturas.R;
 import com.example.lecturas.clases.Utilidades;
-
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -73,7 +70,7 @@ public class capturaLecturaFragment extends Fragment {
         nombre.setText(getArguments().getString("nombre"));
         direccion.setText(getArguments().getString("direccion"));
 
-//        buscar(getArguments().getString("contrato"));
+
         lectura.requestFocus();
 
         imgMedidor.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +92,6 @@ public class capturaLecturaFragment extends Fragment {
                 if(Utilidades.tomadaM && Utilidades.tomadaP){
                     if (!lectura.getText().toString().isEmpty()){
                         int actu = Integer.parseInt(lectura.getText().toString());
-//                    int ant = Integer.parseInt(anterior.getText().toString());
                         guardar(contrato.getText().toString(), lectura.getText().toString(), spinner.getSelectedItem().toString());
                         contrato.setText("");
                         medidor.setText("");

@@ -31,7 +31,6 @@ public class adapterListaLec extends RecyclerView.Adapter<adapterListaLec.ViewHo
         holder.l_medidor.setText(listlecturas.get(i).getList_medidor());
         holder.l_nombre.setText(listlecturas.get(i).getList_nombre());
         holder.l_direccion.setText(listlecturas.get(i).getLista_dir());
-        holder.l_l_ante.setText(listlecturas.get(i).getList_lec_ant());
         holder.l_l_actu.setText(listlecturas.get(i).getList_lec_atu());
         holder.imagen.setImageResource(listlecturas.get(i).getPhoto());
     }
@@ -42,7 +41,7 @@ public class adapterListaLec extends RecyclerView.Adapter<adapterListaLec.ViewHo
     }
 
     public class ViewHolderDatos extends RecyclerView.ViewHolder {
-        TextView l_contrato, l_medidor, l_nombre, l_direccion, l_l_ante, l_l_actu;
+        TextView l_contrato, l_medidor, l_nombre, l_direccion, l_l_actu;
         ImageView imagen;
 
         public ViewHolderDatos( View itemView) {
@@ -51,7 +50,6 @@ public class adapterListaLec extends RecyclerView.Adapter<adapterListaLec.ViewHo
             l_medidor = (TextView) itemView.findViewById(R.id.lista_medidor);
             l_nombre = (TextView) itemView.findViewById(R.id.lista_nombre);
             l_direccion = (TextView) itemView.findViewById(R.id.lista_direccion);
-            l_l_ante = (TextView) itemView.findViewById(R.id.lista_lectura_anterior);
             l_l_actu = (TextView) itemView.findViewById(R.id.lista_lecura_actual);
             imagen = (ImageView) itemView.findViewById(R.id.fotito);
         }

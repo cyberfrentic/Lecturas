@@ -106,7 +106,6 @@ public class importarFragment extends Fragment {
                                     contenedor.put("direccion", direc);
                                     contenedor.put("nummed", medidor);
                                     contenedor.put("tarifa", tarif);
-                                    contenedor.put("lecant", anterior);
                                     contenedor.put("modif", "0");
                                     BaseDeDatos.insert("padron", null, contenedor);
                                 }

@@ -15,6 +15,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -24,6 +25,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -32,6 +34,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.lecturas.clases.Dialogo;
 import com.example.lecturas.fragments.homeFragment;
 import com.example.lecturas.fragments.importarFragment;
 import com.example.lecturas.fragments.lecturafragment;
@@ -50,7 +53,7 @@ import java.io.OutputStreamWriter;
 import java.util.Calendar;
 
 public class navigationDrawActiviy extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, Response.Listener<JSONObject>, Response.ErrorListener {
+        implements NavigationView.OnNavigationItemSelectedListener, Response.Listener<JSONObject>, Response.ErrorListener, Dialogo.DialogoListener {
 
     //variable para guardar la opcion selccionada en el menu
     public static int opcion;
@@ -228,7 +231,9 @@ public class navigationDrawActiviy extends AppCompatActivity
         } else if (id == R.id.nav_share) {
            fm.beginTransaction().replace(R.id.contenedor, new preCedFragment()).addToBackStack(null).commit();
         } else if (id == R.id.importar) {
-            fm.beginTransaction().replace(R.id.contenedor, new importarFragment()).addToBackStack(null).commit();
+            //fm.beginTransaction().replace(R.id.contenedor, new importarFragment()).addToBackStack(null).commit();
+            Dialogo dialogo = new Dialogo();
+            dialogo.show(getSupportFragmentManager(),"Example Dialog");
         } else if (id == R.id.exportar) {
             final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
             // Setting Dialog Title
@@ -365,7 +370,6 @@ public class navigationDrawActiviy extends AppCompatActivity
     public void onErrorResponse(VolleyError error) {
         progreso.dismiss();
         Toast.makeText(this, "no se pudo conectar: "+error.toString(), Toast.LENGTH_LONG).show();
-        Log.i("ERROR", error.toString());
     }
 
     @Override
@@ -373,6 +377,15 @@ public class navigationDrawActiviy extends AppCompatActivity
         Toast.makeText(this,response.toString(), Toast.LENGTH_LONG).show();
         progreso.dismiss();
     }
+
+    @Override
+    public void applyTexts(String sector, String ruta) throws JSONException {
+
+
+    }
+
+
     //#############################################################################
+
 
 }

@@ -5,7 +5,6 @@ public class ListaVo {
     private String list_medidor;
     private String list_nombre;
     private String lista_dir;
-    private String list_lec_ant;
     private String list_lec_atu;
     private int photo;
 
@@ -18,7 +17,6 @@ public class ListaVo {
         this.list_medidor = list_medidor;
         this.list_nombre = list_nombre;
         this.lista_dir = lista_dir;
-        this.list_lec_ant = list_lec_ant;
         this.list_lec_atu = list_lec_atu;
         this.photo = photo;
     }
@@ -53,14 +51,6 @@ public class ListaVo {
 
     public void setLista_dir(String lista_dir) {
         this.lista_dir = lista_dir;
-    }
-
-    public String getList_lec_ant() {
-        return list_lec_ant;
-    }
-
-    public void setList_lec_ant(String list_lec_ant) {
-        this.list_lec_ant = list_lec_ant;
     }
 
     public String getList_lec_atu() {

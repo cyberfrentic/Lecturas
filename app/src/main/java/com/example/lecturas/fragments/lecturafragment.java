@@ -18,13 +18,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SearchView;
-
 import com.example.lecturas.AdminSQLiteOpenHelper;
 import com.example.lecturas.PadronVo;
 import com.example.lecturas.R;
@@ -32,7 +27,6 @@ import com.example.lecturas.adaptadorpadron;
 import com.example.lecturas.clases.Utilidades;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 
 public class lecturafragment extends Fragment{
@@ -49,7 +43,7 @@ public class lecturafragment extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         vista = inflater.inflate(R.layout.fragment_lecturafragment, container, false);
-
+        locationStart();
         // codigo abajo
         listaPadron = new ArrayList<>();
 

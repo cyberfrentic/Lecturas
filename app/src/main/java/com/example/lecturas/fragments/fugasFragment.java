@@ -76,7 +76,11 @@ public class fugasFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Utilidades.fuga = spinner.getSelectedItem().toString();
-                Utilidades.imageFileName = Utilidades.uris.toString();
+                if (Utilidades.uris == null){
+                    Utilidades.imageFileName ="sinfoto";
+                }else {
+                    Utilidades.imageFileName = Utilidades.uris.toString();
+                }
                 guardarDatos();
             }
         });
