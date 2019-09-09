@@ -20,8 +20,8 @@
 
     <string name="nombre">Nombre</string>
     <string name="buton_registrar">Registrar</string>
-    <string name="buton_Importar">Importar Medidores</string>
-    <string name="buton_Exportar">Exportar Medidores</string>
+    <string name="buton_Importar">Importar Catalogo Medidores</string>
+    <string name="buton_Exportar">Exportar Todo</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="importar">Importar Data</string>

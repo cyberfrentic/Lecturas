@@ -14,8 +14,6 @@ import android.os.Environment;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -25,7 +23,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -35,6 +32,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.lecturas.clases.Dialogo;
+import com.example.lecturas.clases.importPadron;
 import com.example.lecturas.fragments.homeFragment;
 import com.example.lecturas.fragments.importarFragment;
 import com.example.lecturas.fragments.lecturafragment;
@@ -53,7 +51,7 @@ import java.io.OutputStreamWriter;
 import java.util.Calendar;
 
 public class navigationDrawActiviy extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, Response.Listener<JSONObject>, Response.ErrorListener, Dialogo.DialogoListener {
+        implements NavigationView.OnNavigationItemSelectedListener, Response.Listener<JSONObject>, Response.ErrorListener, Dialogo.DialogoListener, importPadron.importPadronListener {
 
     //variable para guardar la opcion selccionada en el menu
     public static int opcion;
@@ -144,6 +142,7 @@ public class navigationDrawActiviy extends AppCompatActivity
         if (!usuario.equals("admin")){
             navigationView.getMenu().findItem(R.id.importar).setVisible(false);
             navigationView.getMenu().findItem(R.id.exportar).setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_tools).setVisible(false);
         }
 
         if (mes == 1 || mes==5 || mes== 9) {
@@ -151,7 +150,7 @@ public class navigationDrawActiviy extends AppCompatActivity
         }else{
             navigationView.getMenu().findItem(R.id.nav_share).setVisible(false);
         }
-        navigationView.getMenu().findItem(R.id.nav_tools).setVisible(false);
+
 
 
 
@@ -228,10 +227,11 @@ public class navigationDrawActiviy extends AppCompatActivity
             fm.beginTransaction().replace(R.id.contenedor, new listaFragment()).addToBackStack(null).commit();
         } else if (id == R.id.nav_tools) {
 //            fm.beginTransaction().replace(R.id.contenedor, new editarFragment()).commit();
+            openDialog();
         } else if (id == R.id.nav_share) {
            fm.beginTransaction().replace(R.id.contenedor, new preCedFragment()).addToBackStack(null).commit();
         } else if (id == R.id.importar) {
-            //fm.beginTransaction().replace(R.id.contenedor, new importarFragment()).addToBackStack(null).commit();
+//            fm.beginTransaction().replace(R.id.contenedor, new importarFragment()).addToBackStack(null).commit();
             Dialogo dialogo = new Dialogo();
             dialogo.show(getSupportFragmentManager(),"Example Dialog");
         } else if (id == R.id.exportar) {
@@ -304,6 +304,11 @@ public class navigationDrawActiviy extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void openDialog() {
+        importPadron ImporPadron = new importPadron();
+        ImporPadron.show(getSupportFragmentManager(), "Importar Padron");
     }
 
     //#################################################################
@@ -384,7 +389,10 @@ public class navigationDrawActiviy extends AppCompatActivity
 
     }
 
+    @Override
+    public void applyText2(String Sector) {
 
+    }
     //#############################################################################
 
 

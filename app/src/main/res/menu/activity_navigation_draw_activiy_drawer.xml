@@ -17,23 +17,28 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_slideshow" />
         <item
-            android:id="@+id/nav_tools"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/menu_tools" />
-        <item
             android:id="@+id/nav_share"
             android:icon="@drawable/ic_menu_share"
             android:title="@string/menu_share" />
-        <item
-            android:id="@+id/importar"
-            android:icon="@android:drawable/stat_notify_sdcard_usb"
-            android:title="@string/buton_Importar" />
-        <item
-            android:id="@+id/exportar"
-            android:icon="@android:drawable/stat_notify_sdcard_prepare"
-            android:title="@string/buton_Exportar" />
     </group>
 
+
+    <item android:title="Administrativo">
+        <menu >
+            <item
+                android:id="@+id/nav_tools"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="Importar Padron" />
+            <item
+                android:id="@+id/importar"
+                android:icon="@android:drawable/stat_notify_sdcard_usb"
+                android:title="@string/buton_Importar" />
+            <item
+                android:id="@+id/exportar"
+                android:icon="@android:drawable/stat_notify_sdcard_prepare"
+                android:title="@string/buton_Exportar" />
+        </menu>
+    </item>
     <item android:title="@string/cerrar_app">
         <menu>
             <item
