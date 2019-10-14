@@ -58,12 +58,12 @@ public class listaFragment extends Fragment {
             int numRows = (int) DatabaseUtils.queryNumEntries(BaseDeDatos, "lectura");
             for (int x =0; x < numRows; x++){
                 String contras = fila.getString(0);
-                Cursor fila2 = BaseDeDatos.rawQuery("select contrato, nummed, nombre, direccion, lecant from padron where contrato =?", new String[] {contras});
+                Cursor fila2 = BaseDeDatos.rawQuery("select contrato, nummed, nombre, direccion from padron where contrato =?", new String[] {contras});
                 fila2.moveToFirst();
                 if (!fila2.moveToFirst()){
                     Toast.makeText(getContext(), "Algo Salio Realmente Mal comunicate con Alguien que sepa que paso jejeje", Toast.LENGTH_LONG).show();
                 }
-                listaLecturas.add(new ListaVo(fila.getString(0), fila2.getString(1), fila2.getString(2), fila2.getString(3), fila2.getString(4),fila.getString(1),R.drawable.lecturas2));
+                listaLecturas.add(new ListaVo(fila.getString(0), fila2.getString(1), fila2.getString(2), fila2.getString(3),fila.getString(1),R.drawable.lecturas2));
 
                 fila.moveToNext();
             }

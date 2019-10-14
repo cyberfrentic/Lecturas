@@ -7,14 +7,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -29,6 +27,8 @@ import com.example.lecturas.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import static com.example.lecturas.clases.Utilidades.IpDeServer;
 
 public class importPadron extends AppCompatDialogFragment implements Response.Listener<JSONObject>, Response.ErrorListener {
     RequestQueue request;
@@ -75,7 +75,7 @@ public class importPadron extends AppCompatDialogFragment implements Response.Li
         progreso.show();
         JSONObject postparams = new JSONObject();
         postparams.put("sector", sectorText);
-        String url="http://192.168.15.45:7550/comercial/api/padron/get";
+        String url="http://"+IpDeServer+":7550/comercial/api/padron/get";
         jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, postparams,  this,this);
         request.add(jsonObjectRequest);
     }

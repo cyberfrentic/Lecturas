@@ -55,6 +55,9 @@ public class Utilidades {
     //Fragment Fugas
     public static String fuga;
     public static String imageFileName;
+
+    // direccion ip del servidor de intercambio
+    public static String IpDeServer="";
 }
 
 

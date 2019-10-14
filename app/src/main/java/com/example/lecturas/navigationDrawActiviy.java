@@ -1,16 +1,13 @@
 package com.example.lecturas;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
@@ -32,6 +29,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.lecturas.clases.Dialogo;
+import com.example.lecturas.clases.Dialogo2;
 import com.example.lecturas.clases.importPadron;
 import com.example.lecturas.fragments.homeFragment;
 import com.example.lecturas.fragments.importarFragment;
@@ -43,12 +41,9 @@ import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
 import java.util.Calendar;
+
+import static com.example.lecturas.clases.Utilidades.IpDeServer;
 
 public class navigationDrawActiviy extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, Response.Listener<JSONObject>, Response.ErrorListener, Dialogo.DialogoListener, importPadron.importPadronListener {
@@ -59,7 +54,7 @@ public class navigationDrawActiviy extends AppCompatActivity
     private int mes = fecha.get(Calendar.MONTH) + 1;
     final private int REQUEST_CODE_ASK_PERMISSION=111;
     RequestQueue request;
-    JsonObjectRequest jsonObjectRequest;
+    JsonObjectRequest jsonObjectRequest, jsonObjectRequest2;
     ProgressDialog progreso;
 
     @Override
@@ -204,10 +199,15 @@ public class navigationDrawActiviy extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            openDialog2();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void openDialog2() {
+        Dialogo2 dialogo2 = new Dialogo2();
+        dialogo2.show(getSupportFragmentManager(), "direciones ips");
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -235,75 +235,54 @@ public class navigationDrawActiviy extends AppCompatActivity
             Dialogo dialogo = new Dialogo();
             dialogo.show(getSupportFragmentManager(),"Example Dialog");
         } else if (id == R.id.exportar) {
-            final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-            // Setting Dialog Title
-            alertDialog.setTitle("Sistema Lecturas");
-            // Setting Dialog Message
-            alertDialog.setMessage("Se procedera a Exportar los datos de las Lecturas tomadas!");
-            // Setting Icon to Dialog
-            alertDialog.setIcon(R.drawable.alerta);
-            // Setting OK Button
-            alertDialog.setButton("Aceptar", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    String fileName = "ListaLecturas.txt";
-                    AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(getApplicationContext(), "administracion", null, 1);
-                    SQLiteDatabase BaseDeDatos = admin.getWritableDatabase();
-                    Cursor fila = BaseDeDatos.rawQuery("select contrato, lectura, anomalia, longitud, latitud, imgMedidor, imgpred from lectura",null);
-                    try{
-
-                        String nombre_completo = Environment.getExternalStorageDirectory() + File.separator +fileName;
-                        File outputFile = new File(nombre_completo);
-                        if (outputFile.exists()){
-                            outputFile.delete();
-                        }
-                        //OutputStreamWriter archivo = new OutputStreamWriter(openFileOutput(nombre_completo, Activity.MODE_PRIVATE));
-
-                        /*------------------------------*/
-                        FileOutputStream fOut = new FileOutputStream(outputFile, true);
-                        BufferedWriter archivo = new BufferedWriter(new OutputStreamWriter(fOut));
-                        //OutputStreamWriter archivo = new OutputStreamWriter(fOut);
-                        /*------------------------------*/
-                        while (fila.moveToNext()) {
-                            archivo.write(fila.getString(0) + ", " + fila.getString(1)  + ", " + fila.getString(2)+ ", " + fila.getString(3)+ ", " + fila.getString(4)+ ", " + fila.getString(5)+ ", " + fila.getString(6));
-                            archivo.newLine();
-                        }
-                        archivo.flush();
-                        archivo.close();
-
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
-                    alertDialog.dismiss();
-                }
-            });
-            alertDialog.setButton2("Cancelar", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    alertDialog.dismiss();
-                }
-            });
-            // Showing Alert Message
-            alertDialog.show();
-
             //#################################################################
             //#### Comunicación con la Api Rest Full de python y por POST #####
             //#################################################################
             request = Volley.newRequestQueue(this);
             try {
-                cargarWebService();
+                if (mes == 1 || mes==5 || mes== 9) {
+                    enviarCedulas();
+                }
+                enviarLecturas();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
             //##################################################################
-
         } else if (id == R.id.nav_send) {
             Intent salida = new Intent( Intent.ACTION_MAIN); //Llamando a la activity principal
             finish(); // La cerramos.
             System.exit(0);
         }
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void enviarLecturas() throws JSONException{
+        progreso = new ProgressDialog(this);
+        progreso.setTitle("App Comercial");
+        progreso.setMessage("Enviando...");
+        progreso.show();
+        JSONObject postparams2 = new JSONObject();
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "administracion", null, 1);
+        SQLiteDatabase BaseDeDatos = admin.getWritableDatabase();
+        String [] campos = new String[] {"contrato", "lectura", "anomalia", "longitud", "latitud", "imgmedidor", "imgpred"};
+        Cursor fila = BaseDeDatos.query("lectura",campos,null, null, null, null, null);
+        if (fila.moveToFirst()) {
+            do {
+                postparams2.put("contrato", fila.getString(0));
+                postparams2.put("lectura", fila.getString((1)));
+                postparams2.put("anomalia", fila.getString(2));
+                postparams2.put("longitud", fila.getString(3));
+                postparams2.put("latitud", fila.getString(4));
+                postparams2.put("imgmedidor", fila.getString(5));
+                postparams2.put("imgpred", fila.getString(6));
+                String url2="http://"+IpDeServer+":7550/comercial/api/import/lecturas/Post";
+                jsonObjectRequest2 = new JsonObjectRequest(Request.Method.POST, url2, postparams2,  this,this);
+                request.add(jsonObjectRequest2);
+            }while (fila.moveToNext());
+            BaseDeDatos.close();
+        }
     }
 
     private void openDialog() {
@@ -314,7 +293,7 @@ public class navigationDrawActiviy extends AppCompatActivity
     //#################################################################
     //#### Comunicación con la Api Rest Full de python y por POST #####
     //#################################################################
-    private void cargarWebService() throws JSONException {
+    private void enviarCedulas() throws JSONException {
         progreso = new ProgressDialog(this);
         progreso.setTitle("App Comercial");
         progreso.setMessage("Conectando...");
@@ -360,21 +339,21 @@ public class navigationDrawActiviy extends AppCompatActivity
                 postparams.put("longitud", fila.getString(31));
                 postparams.put("fecha", fila.getString(32));
                 postparams.put("sector", fila.getString(33));
-                String url="http://192.168.15.45:7550/comercial/api/rest";
+                String url="http://"+IpDeServer+":7550/comercial/api/rest";
                 jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, postparams,  this,this);
                 request.add(jsonObjectRequest);
             }while (fila.moveToNext());
+            BaseDeDatos.close();
         }else{
             Toast.makeText(this, "No existen datos", Toast.LENGTH_SHORT).show();
         }
 
-//        BaseDeDatos.delete("cedula", null, null);
     }
 
     @Override
     public void onErrorResponse(VolleyError error) {
         progreso.dismiss();
-        Toast.makeText(this, "no se pudo conectar: "+error.toString(), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "no se pudo conectar: "+ error.toString(), Toast.LENGTH_LONG).show();
     }
 
     @Override

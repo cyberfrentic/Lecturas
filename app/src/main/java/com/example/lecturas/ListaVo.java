@@ -12,7 +12,7 @@ public class ListaVo {
 
     }
 
-    public ListaVo(String list_contrato, String list_medidor, String list_nombre, String lista_dir, String list_lec_ant, String list_lec_atu, int photo) {
+    public ListaVo(String list_contrato, String list_medidor, String list_nombre, String lista_dir, String list_lec_atu, int photo) {
         this.list_contrato = list_contrato;
         this.list_medidor = list_medidor;
         this.list_nombre = list_nombre;

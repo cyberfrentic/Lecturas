@@ -5,7 +5,7 @@
     <string name="nav_header_title">Aplicacion Movil Comercial</string>
     <string name="nav_header_subtitle">Comision de Agua Potable y Alcantarillado</string>
     <string name="nav_header_desc">Navegador de App Comercial</string>
-    <string name="action_settings">Acerca de ...</string>
+    <string name="action_settings">Configurar IP</string>
     <string name="etuser">Usuario</string>
     <string name="etpass">Contraseña</string>
     <string name="button">Acceder</string>

@@ -30,6 +30,8 @@ import org.json.JSONObject;
 
 import java.util.Calendar;
 
+import static com.example.lecturas.clases.Utilidades.IpDeServer;
+
 
 public class Dialogo extends AppCompatDialogFragment implements Response.Listener<JSONObject>, Response.ErrorListener {
     private TextView sector, ruta;
@@ -90,7 +92,7 @@ public class Dialogo extends AppCompatDialogFragment implements Response.Listene
         JSONObject postparams = new JSONObject();
         postparams.put("sector", sectorText);
         postparams.put("ruta", rutaText);
-        String url="http://192.168.15.45:7550/comercial/api/listaMedidores/get";
+        String url="http://"+IpDeServer+":7550/comercial/api/listaMedidores/get";
         jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, postparams,  this,this);
         request.add(jsonObjectRequest);
     }

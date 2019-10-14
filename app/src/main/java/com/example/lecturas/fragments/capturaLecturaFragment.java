@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -99,6 +100,8 @@ public class capturaLecturaFragment extends Fragment {
                         direccion.setText("");
                         lectura.setText("");
                         spinner.setSelection(0);
+                        imgMedidor.setImageResource(R.drawable.lecturas2);
+                        imgPredio.setImageResource(R.drawable.ic_action_name);
                         Toast.makeText(getContext(),Utilidades.Latitud+" "+Utilidades.Longitud, Toast.LENGTH_LONG).show();
 
                     }else{

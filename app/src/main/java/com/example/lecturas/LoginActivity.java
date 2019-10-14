@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import static com.example.lecturas.clases.Utilidades.IpDeServer;
+
 public class LoginActivity extends AppCompatActivity {
 
     private EditText tv_usuario, tv_contrasenia;
@@ -23,7 +25,9 @@ public class LoginActivity extends AppCompatActivity {
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "administracion", null, 1);
         SQLiteDatabase BaseDeDatos = admin.getWritableDatabase();
         String usua = "admin";
+        String ips="1";
         Cursor fila = BaseDeDatos.rawQuery("select user from usuarios where user =?", new String[] {usua});
+        Cursor ipex = BaseDeDatos.rawQuery("select id from ipes where id=?", new String[] {ips});
 
         if (!fila.moveToFirst()){
             ContentValues registro = new ContentValues();
@@ -35,6 +39,13 @@ public class LoginActivity extends AppCompatActivity {
             registro.put("pass", "123456");
             registro.put("nombre", "Usuario Asignado a la Terminal");
             BaseDeDatos.insert("usuarios", null, registro);
+            //BaseDeDatos.close();
+        }
+        if (!ipex.moveToFirst()){
+            ContentValues dire = new ContentValues();
+            dire.put("id","1");
+            dire.put("direccion", "192.168.15.45");
+            BaseDeDatos.insert("ipes", null, dire);
             BaseDeDatos.close();
         }
 
@@ -55,7 +66,16 @@ public class LoginActivity extends AppCompatActivity {
 
         if (!usuario.isEmpty() && !contra.isEmpty()){
             Toast.makeText(this, "Verificando usuario " + usuario, Toast.LENGTH_SHORT).show();
+            String ips2="1";
             Cursor fila = BaseDeDatos.rawQuery("select user, pass from usuarios where user=?",new String[] {usuario});
+            Cursor ipex2 = BaseDeDatos.rawQuery("select direccion from ipes" , null);
+            if (ipex2.moveToFirst()){
+                Toast.makeText(this,ipex2.getString(0), Toast.LENGTH_LONG ).show();
+                IpDeServer = ipex2.getString(0);
+            }else{
+                Toast.makeText(this, "No se encontro nada", Toast.LENGTH_LONG);
+            }
+
             if (fila.moveToFirst()) {
                 fila.moveToFirst();
                 String u = fila.getString(0);

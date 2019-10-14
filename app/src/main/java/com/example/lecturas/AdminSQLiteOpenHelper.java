@@ -10,6 +10,8 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase BaseDeDatos) {
+        // tablas de ips
+        BaseDeDatos.execSQL("CREATE TABLE ipes(id text primary key unique, direccion text)");
         // usuarios de la app
         BaseDeDatos.execSQL("CREATE TABLE usuarios(user text primary key unique, pass text, nombre text)");
         //Lista de medidores
@@ -26,11 +28,13 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper{
 
     @Override
     public void onUpgrade(SQLiteDatabase BaseDeDatos, int oldVersion, int newVersion) {
+        BaseDeDatos.execSQL("DROP TABLE IF EXISTS ipes");
         BaseDeDatos.execSQL("DROP TABLE IF EXISTS usuarios");
         BaseDeDatos.execSQL("DROP TABLE IF EXISTS padron");
         BaseDeDatos.execSQL("DROP TABLE IF EXISTS lectura");
         BaseDeDatos.execSQL("DROP TABLE IF EXISTS padronTotal");
         BaseDeDatos.execSQL("DROP TABLE IF EXISTS cedula");
+        BaseDeDatos.execSQL("CREATE TABLE IF NOT EXISTS ipes(id text primary key unique, direccion text)");
         BaseDeDatos.execSQL("CREATE TABLE IF NOT EXISTS usuarios(user text primary key unique, pass text, nombre text)");
         BaseDeDatos.execSQL("CREATE TABLE IF NOT EXISTS padron(id int primary key unique, numloc text, contrato text, nombre text, direccion text, nummed text, tarifa text, modif text)");
         BaseDeDatos.execSQL("CREATE TABLE IF NOT EXISTS lectura(contrato text primary key unique, lectura text, anomalia text)");
